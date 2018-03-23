@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="italy" sizes="99x66" th:href="@{images/demo/italy.png}"/>
+    <link rel="icon" type="image/png" th:href="@{images/demo/italy.png}"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>CivitasProcuratio</title>
+    <meta name="description" content="Elegant UI Toolkit for Professional Web Creatives Based on Bootstrap 4"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{css/shards.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/shards-demo.css}"/>
+</head>
+<body>
+    <div class="loader"><div class="page-loader"></div></div>
+    <!-- Welcome Section -->
+    <div class="welcome d-flex justify-content-center flex-column">
+        <div class="inner-wrapper mt-auto mb-auto">
+            <h1 class="slide-in">CIVITAS PROCURATIO</h1>
+            <p class="slide-in">Gestione Territoriale</p>
+            <div class="action-links slide-in">
+                <a th:href="@{/registrationUser}" class="btn btn-primary btn-pill align-self-center mr-2">Registrati</a>
+                <a th:href="@{/login}" class="btn btn-outline-light btn-pill align-self-center">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <div id="fb-root"></div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="js/shards.min.js"></script>
+    <script src="js/demo.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+<body>
+    <h2>DATA: </h2>
+    <p th:text="${#dates.format(myDate, 'dd-MM-yyyy')}"></p>
+    <p th:text="${message}"></p>
+    <table class="table">
+        <tr>
+            <th>OSPITE</th>
+            <th>PRESENZA</th>
+        </tr>
+        <tbody>
+            <tr th:each="activity : ${activities}">
+                <td th:text="${activity.guest.id}"></td>
+                <td th:text="${activity.value}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${activityDate}}">Aggiorna Presenze</a>
+    </div>
+    <div>
+        <a th:href="@{'/admin/insertDate' + '/' + ${structure.id}}">Presenze</a>
+    </div>
+</body>
+</html>

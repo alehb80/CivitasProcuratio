@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+<body>
+<div class="form container">
+    <h2>Modifica Ospite</h2>
+    <p th:text="${message}"></p>
+    <form th:action="@{'/admin/updateGuest' + '/' + ${guest.id}}" method="POST" th:object="${guest}">
+        <ul>
+            <li>
+                <h4>Nome:</h4>
+                <input type="text" placeholder="Nome" name="firstName" th:field="*{firstName}" required="required"/>
+                <span th:if="${#fields.hasErrors('firstName')}">Errore: campo obbligatorio</span>
+            </li>
+            <li>
+                <h4>Cognome:</h4>
+                <input type="text" placeholder="Cognome" name="lastName" th:field="*{lastName}" required="required"/>
+                <span th:if="${#fields.hasErrors('lastName')}">Errore: campo obbligatorio</span>
+            </li>
+            <li>
+                <h4>Sesso:</h4>
+                <select id="gender" name="gender" th:field="*{gender}" required="required" title="gender">
+                    <option value="">&lt;seleziona&gt;</option>
+                    <option value="M">Uomo</option>
+                    <option value="F">Donna</option>
+                </select>
+                <span th:if="${#fields.hasErrors('gender')}">Errore: campo obbligatorio</span>
+            </li>
+            <li>
+                <h4>Data di Nascita:</h4>
+                <input id="dateOfBirth" name="dateOfBirth" type="date" th:field="*{dateOfBirth}" required="required" title="dateOfBirth"/>
+                <span th:if="${#fields.hasErrors('dateOfBirth')}">Errore: campo obbligatorio</span>
+            </li>
+            <button type="submit">Conferma</button>
+        </ul>
+    </form>
+</div>
+</body>
+</html>

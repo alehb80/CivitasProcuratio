@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+<body>
+    <h2>Info struttura:</h2>
+    <table class="table">
+        <tr>
+            <th>NOME</th>
+            <th>CATEGORIA</th>
+            <th>UBICAZIONE</th>
+            <th>NUMERO TELEFONICO</th>
+        </tr>
+        <tbody>
+            <td th:text="${structure.name}"></td>
+            <td th:text="${structure.category}"></td>
+            <td th:text="${structure.site}"></td>
+            <td th:text="${structure.phoneNumber}"></td>
+            <td><a th:href="@{'/admin/adminGuests' + '/' + ${structure.id}}">OSPITI</a></td>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{'/admin/insertDate' + '/' + ${structure.id}}">Presenze</a>
+    </div>
+    <div>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</body>
+</html>

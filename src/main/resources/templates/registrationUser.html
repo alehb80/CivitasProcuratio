@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="italy" sizes="99x66" th:href="@{images/demo/italy.png}"/>
+    <link rel="icon" type="image/png" th:href="@{images/demo/italy.png}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>CivitasProcuratio</title>
+    <!-- Bootstrap core CSS-->
+    <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Registrati</div>
+            <div  class="text-center">
+                <a class="d-block small mt-3"  th:text="${message}"></a>
+            </div>
+            <div class="card-body">
+                <form th:action="@{'/registrationUser'}" method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Username</label>
+                        <input class="form-control" id="exampleInputUsername1" type="text" aria-describedby="usernameHelp" placeholder="Username" name="username" th:field="*{username}" required="required"/>
+                        <span th:if="${#fields.hasErrors('username')}">Errore: campo obbligatorio</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter" name="email" th:field="*{email}" required="required"/>
+                        <span th:if="${#fields.hasErrors('email')}">Errore: campo obbligatorio</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password" th:field="*{password}" required="required"/>
+                        <span th:if="${#fields.hasErrors('password')}">Errore: campo obbligatorio</span>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Registrati</button>
+                </form>
+                <div class="text-center">
+                    <a class="d-block small mt-3" th:href="@{/index}">Home</a>
+                    <!-- <a class="d-block small" href="forgot-password.html">Forgot Password?</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+</html>

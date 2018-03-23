@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <title>CivitasProcuratio</title>
+    </head>
+<body>
+    <div class="form container">
+        <h2>Aggiungi un nuovo Admin</h2>
+        <p th:text="${message}"></p>
+        <form th:action="@{'/superadmin/adminAdd' + '/' + ${user.structure.id}}" method="POST" th:object="${user}">
+            <ul>
+                <li>
+                    <h4>Username:</h4>
+                    <input type="text" placeholder="Username" name="username" th:field="*{username}" required="required"/>
+                    <span th:if="${#fields.hasErrors('username')}">Errore: campo obbligatorio</span>
+                </li>
+                <li>
+                    <h4>Email:</h4>
+                    <input type="email" placeholder="Email" name="email" th:field="*{email}" required="required"/>
+                    <span th:if="${#fields.hasErrors('email')}">Errore: campo obbligatorio</span>
+                </li>
+                <li>
+                    <h4>Password:</h4>
+                    <input type="password" placeholder="Password" name="password" th:field="*{password}" required="required"/>
+                    <span th:if="${#fields.hasErrors('password')}">Errore: campo obbligatorio</span>
+                </li>
+                <button type="submit">Conferma</button>
+            </ul>
+        </form>
+    </div>
+</body>
+</html>

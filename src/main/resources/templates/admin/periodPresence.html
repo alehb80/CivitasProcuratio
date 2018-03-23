@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+    <body>
+    <table class="table">
+        <tr>
+            <th>OSPITE</th>
+            <th>DATA</th>
+            <th>PRESENZA</th>
+        </tr>
+        <tbody>
+        <tr th:each="activity : ${activities}">
+            <td th:text="${activity.guest.id}"></td>
+            <td th:text="${#dates.format(activity.date, 'dd-MM-yyyy')}"></td>
+            <td th:text="${activity.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{'/admin/insertPeriod' + '/' + ${structure.id}}">Cerca per periodo</a>
+    </div>
+    </body>
+</html>

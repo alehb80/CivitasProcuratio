@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+<body>
+    <h2>Inserisci la data</h2>
+    <p th:text="${message}"></p>
+    <form th:action="@{'/superadmin/dateStructure' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
+        <label for="activityDate"></label><input id="activityDate" name="activityDate" type="date" required="required"/>
+        <button type="submit">Conferma</button>
+    </form>
+    <h2>Inserisci il periodo</h2>
+    <p th:text="${text}"></p>
+    <form th:action="@{'/superadmin/periodStructure' + '/' + ${structure.id}}" method="POST">
+        <label for="from"></label><input id="from" name="from" type="date" th:object="${from}" required="required"/>
+        <label for="to"></label><input id="to" name="to" type="date" th:object="${to}" required="required"/>
+        <button type="submit">Conferma</button>
+    </form>
+    <div>
+        <a th:href="@{'/superadmin/structuresManagement'}">Torna alla home</a>
+    </div>
+</body>
+</html>
