@@ -11,7 +11,7 @@
             <th>Cognome</th>
             <th>Data Di Nascita</th>
             <th>Sesso</th>
-            <th th:text="${date}"></th>
+            <th th:text="${#dates.format(date, 'dd-MM-yyyy')}"></th>
         </thead>
         <tbody>
         <tr th:each="guest : ${guests}">
