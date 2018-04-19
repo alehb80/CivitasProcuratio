@@ -197,4 +197,12 @@ public class ActivityController {
         return "superadmin/dateStructure";
     }
 
+    @RequestMapping(value = "/admin/signatureSheet/{id}")
+    public String signatureSheet(@PathVariable("id") Long id, Model model) {
+        Date date = new Date();
+        model.addAttribute("date", date);
+        model.addAttribute("guests", this.guestService.findByStructure(this.structureService.findOne(id)));
+        return "admin/signatureSheet";
+    }
+
 }

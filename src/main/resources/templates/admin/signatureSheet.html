@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>CivitasProcuratio</title>
+</head>
+<body>
+    <table class="table">
+        <thead class="text-primary">
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Data Di Nascita</th>
+            <th>Sesso</th>
+            <th th:text="${date}"></th>
+        </thead>
+        <tbody>
+        <tr th:each="guest : ${guests}">
+            <td th:text="${guest.id}"></td>
+            <td th:text="${guest.firstName}"></td>
+            <td th:text="${guest.lastName}"></td>
+            <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
+            <td th:text="${guest.gender}"></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
