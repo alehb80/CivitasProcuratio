@@ -4,35 +4,34 @@
     <title>CivitasProcuratio</title>
 </head>
 <body>
-    <h2>Inserisci presenze per la data:</h2>
-    <p th:text="${#dates.format(myDate, 'dd-MM-yyyy')}"></p>
-    <p th:text="${message}"></p>
-        <table class="table">
-            <tr>
-                <th>OSPITE</th>
-                <th>PRESENZA</th>
-                <th></th>
-            </tr>
-            <tbody>
-            <tr th:each="guest : ${guests}">
-                <td th:text="${guest.id}"></td>
-                <td>
-                    <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${activityDate}}" method="POST" th:object="${activity}">
-                        <input type="radio" th:field="*{value}" th:value="yes" />
-                            <label>SI</label>
-                        <input type="radio" th:field="*{value}" th:value="no" />
-                            <label>NO</label>
-                        <td>
-                            <button type="submit">Conferma</button>
-                            <span th:if="${#fields.hasErrors('value')}">Errore: campo obbligatorio</span>
-                        </td>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <a th:href="@{'/admin/insertDate' + '/' + ${structure.id}}">Presenze</a>
-        </div>
+<h2>Inserisci presenze per la data:</h2>
+<p th:text="${#dates.format(myDate, 'dd-MM-yyyy')}"></p>
+<p th:text="${message}"></p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>NOME</th>
+        <th>COGNOME</th>
+        <th>PRESENZA</th>
+        <th></th>
+    </tr>
+    <tbody>
+    <tr th:each="guest : ${guests}">
+        <td th:text="${guest.id}"></td>
+        <td th:text="${guest.firstName}"></td>
+        <td th:text="${guest.lastName}"></td>
+        <td>
+            <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${activityDate}}" method="POST" th:object="${activity}">
+                <input type="checkbox" th:field="*{value}" th:value="${guest.id}" />
+                <label>SI</label>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    <button type="submit">Conferma</button>
+</table>
+<div>
+    <a th:href="@{'/admin/insertDate' + '/' + ${structure.id}}">Presenze</a>
+</div>
 </body>
 </html>
