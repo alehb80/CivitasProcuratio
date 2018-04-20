@@ -160,7 +160,7 @@ public class ActivityController {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "superadmin/dateStructure";
         }
-        model.addAttribute("message", activities.size());
+        model.addAttribute("text", activities.size());
         return "superadmin/dateStructure";
     }
 
