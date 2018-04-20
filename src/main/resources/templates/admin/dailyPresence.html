@@ -1,29 +1,150 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="utf-8"/>
+    <link rel="italy" sizes="99x66" href="/images/demo/italy.png"/>
+    <link rel="icon" type="image/png" href="/images/demo/italy.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>CivitasProcuratio</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- Bootstrap core CSS     -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--  Material Dashboard CSS    -->
+    <link href="/css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="/css/demo.css" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'/>
 </head>
 <body>
-    <h2>DATA: </h2>
-    <p th:text="${#dates.format(myDate, 'dd-MM-yyyy')}"></p>
-    <p th:text="${message}"></p>
-    <table class="table">
-        <tr>
-            <th>OSPITE</th>
-            <th>PRESENZA</th>
-        </tr>
-        <tbody>
-            <tr th:each="activity : ${activities}">
-                <td th:text="${activity.guest.id}"></td>
-                <td th:text="${activity.value}"></td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${activityDate}}">Aggiorna Presenze</a>
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue" data-image="../images/demo/geometric-grey-background.png">
+            <div class="logo">
+                <a class="simple-text" th:text="${session.user.username}"></a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a th:href="@{/role}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/profile}">
+                            <i class="material-icons">person</i>
+                            <p>Profilo</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">content_paste</i>
+                            <p>Struttura</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">group</i>
+                            <p>Ospiti</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">grid_on</i>
+                            <p>Presenze</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a th:href="@{/logout}">
+                            <i class="material-icons">input</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title" th:text="${#dates.format(myDate, 'dd-MM-yyyy')}">Data:</h4>
+                                    <!-- <p th:text="${#dates.format(myDate, 'dd-MM-yyyy')}"></p> -->
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <p th:text="${message}"></p>
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Ospite</th>
+                                            <th>Nome</th>
+                                            <th>Cognome</th>
+                                            <th>Presenza</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="activity : ${activities}">
+                                            <td th:text="${activity.guest.id}"></td>
+                                            <td th:text="${activity.guest.firstName}"></td>
+                                            <td th:text="${activity.guest.lastName}"></td>
+                                            <td th:text="${activity.value}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${activityDate}}">Aggiorna Presenze</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <a th:href="@{'/admin/insertDate' + '/' + ${structure.id}}">Presenze</a>
-    </div>
+
+    <!--   Core JS Files   -->
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript"/>
+    <script src="/js/bootstrap.min.js" type="text/javascript"/>
+    <script src="/js/material.min.js" type="text/javascript"/>
+    <!--  Charts Plugin -->
+    <script src="/js/chartist.min.js"/>
+    <!--  Dynamic Elements plugin -->
+    <script src="/js/arrive.min.js"/>
+    <!--  PerfectScrollbar Library -->
+    <script src="/js/perfect-scrollbar.jquery.min.js"/>
+    <!--  Notifications Plugin    -->
+    <script src="/js/bootstrap-notify.js"/>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"/>
+    <!-- Material Dashboard javascript methods -->
+    <script src="/js/material-dashboard.js?v=1.2.0"/>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="/js/demo1.js"/>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+
+        });
+    </script>
 </body>
 </html>

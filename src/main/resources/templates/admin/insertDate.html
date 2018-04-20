@@ -1,23 +1,183 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="utf-8"/>
+    <link rel="italy" sizes="99x66" href="/images/demo/italy.png"/>
+    <link rel="icon" type="image/png" href="/images/demo/italy.png"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>CivitasProcuratio</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- Bootstrap core CSS     -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--  Material Dashboard CSS    -->
+    <link href="/css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="/css/demo.css" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <!-- Bootstrap core CSS-->
+    <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet"/>
 </head>
-    <body>
-        <h2>Inserisci la data</h2>
-        <p th:text="${message}"></p>
-        <form th:action="@{'/admin/dailyPresence' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
-            <input id="activityDate" name="activityDate" type="date" required="required" title="activityDate"/>
-                <button type="submit">Conferma</button>
-        </form>
-        <div>
-            <a th:href="@{'/admin/insertPeriod' + '/' + ${structure.id}}">Cerca per periodo</a>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue" data-image="../images/demo/geometric-grey-background.png">
+            <div class="logo">
+                <a class="simple-text" th:text="${session.user.username}"></a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a th:href="@{/role}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/profile}">
+                            <i class="material-icons">person</i>
+                            <p>Profilo</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">content_paste</i>
+                            <p>Struttura</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">group</i>
+                            <p>Ospiti</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                            <i class="material-icons">grid_on</i>
+                            <p>Presenze</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a th:href="@{/logout}">
+                            <i class="material-icons">input</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <a th:href="@{'/admin/structureInfo' + '/' + ${structure.id}}">Torna alla struttura</a>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">Rileva presenze</h4>
+                                    <p th:text="${message}"></p>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <div id="datepickers" class="container">
+                                        <div class="section-title col-lg-8 col-md-10 ml-auto mr-auto">
+                                            <p>Inserisci nel campo di ricerca una data specifica o un periodo.</p>
+                                        </div>
+                                        <div class="example col-lg-8 col-md-10 ml-auto mr-auto">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="activityDate">Data</label>
+                                                        <div class="input-group">
+                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
+                                                                <input id="activityDate" name="activityDate" type="date" required="required" title="activityDate"/>
+                                                                <button type="submit">Conferma</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Periodo</label>
+                                                        <div class="input-daterange input-group" id="datepicker-example-2">
+                                                            <form th:action="@{'/admin/periodPresence' + '/' + ${structure.id}}" method="POST">
+                                                                <span class="input-group-addon">Da</span>
+                                                                <input id="from" name="from" type="date" th:object="${from}" required="required" title="from"/>
+                                                                <span class="input-group-addon">A</span>
+                                                                <input id="to" name="to" type="date" th:object="${to}" required="required" title="to"/>
+                                                                <button type="submit">Conferma</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a th:href="@{'/admin/signatureSheet' + '/' + ${structure.id}}">Stampa foglio firme</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <a th:href="@{'/admin/signatureSheet' + '/' + ${structure.id}}">Stampa foglio firme</a>
-        </div>
-    </body>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript"/>
+    <script src="/js/bootstrap.min.js" type="text/javascript"/>
+    <script src="/js/material.min.js" type="text/javascript"/>
+    <!--  Charts Plugin -->
+    <script src="/js/chartist.min.js"/>
+    <!--  Dynamic Elements plugin -->
+    <script src="/js/arrive.min.js"/>
+    <!--  PerfectScrollbar Library -->
+    <script src="/js/perfect-scrollbar.jquery.min.js"/>
+    <!--  Notifications Plugin    -->
+    <script src="/js/bootstrap-notify.js"/>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"/>
+    <!-- Material Dashboard javascript methods -->
+    <script src="/js/material-dashboard.js?v=1.2.0"/>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="/js/demo1.js"/>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+
+        });
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
 </html>

@@ -41,6 +41,8 @@ public class ActivityController {
     public String showFormDate(@PathVariable("id") Long id, Model model){
         model.addAttribute("activityDate", new Date());
         model.addAttribute("structure", this.structureService.findOne(id));
+        model.addAttribute("from", new Date());
+        model.addAttribute("to", new Date());
         return "admin/insertDate";
     }
 
@@ -107,14 +109,6 @@ public class ActivityController {
         return "admin/insertPresence";
     }
 
-    @RequestMapping(value = "/admin/insertPeriod/{id}", method = RequestMethod.GET)
-    public String periodPresence(@PathVariable("id") Long id, Model model){
-        model.addAttribute("structure", this.structureService.findOne(id));
-        model.addAttribute("from", new Date());
-        model.addAttribute("to", new Date());
-        return "admin/insertPeriod";
-    }
-
     @RequestMapping(value = "/admin/periodPresence/{id}", method = RequestMethod.POST)
     public String insertPeriod(@PathVariable("id") Long id, Model model,
                                @ModelAttribute("from") String from,
@@ -126,16 +120,16 @@ public class ActivityController {
         Date to1 = sdf.parse(String.valueOf(to));
         if (!DateUtils.dateValidation(from1) || !DateUtils.dateValidation(to1)) {
             model.addAttribute("message", "*ATTENZIONE: una delle due date non è corretta, impossibile inserire una data dopo quella odierna!*");
-            return "admin/insertPeriod";
+            return "admin/insertDate";
         }
         if (from1.after(to1)) {
             model.addAttribute("message", "*ATTENZIONE: le date inserite non sono conseguenti tra di loro!*");
-            return "admin/insertPeriod";
+            return "admin/insertDate";
         }
         List<Activity> activities = this.activityService.getPresenceBetweenPeriod(this.guestService.findByStructure(structure), from1, to1);
         if (activities.isEmpty()) {
             model.addAttribute("message", "*Non ci sono presenze per la data scelta*");
-            return "admin/insertPeriod";
+            return "admin/insertDate";
         }
         model.addAttribute("activities", activities);
         return "admin/periodPresence";
