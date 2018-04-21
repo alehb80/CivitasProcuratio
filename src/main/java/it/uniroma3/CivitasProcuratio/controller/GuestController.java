@@ -56,7 +56,7 @@ public class GuestController {
         Structure structure = structureService.findOne(id);
         guest.setStructure(structure);
         guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
-        if (!DateUtils.dateValidation(guest.getDateOfBirth())) {
+        if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "admin/guestAdd";
         }
@@ -84,7 +84,7 @@ public class GuestController {
         Structure structure = structureService.findOne(this.guestService.findOne(id).getStructure().getId());
         guest.setStructure(structure);
         guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
-        if (!DateUtils.dateValidation(guest.getDateOfBirth())) {
+        if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "admin/updateGuest";
         }
@@ -129,19 +129,19 @@ public class GuestController {
         return "admin/guests";
     }
 
-    @InitBinder
-    void initBinder(WebDataBinder webDataBinder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
-
     @RequestMapping("/admin/showUpdateGuest/{id}")
     public String showUpdate(@PathVariable("id") Long idGuest, Model model) {
         Guest guest = this.guestService.findOne(idGuest);
         model.addAttribute("structure", this.structureService.findOne(guest.getStructure().getId()));
         model.addAttribute("guest", guest);
         return "admin/updateGuest";
+    }
+
+    @InitBinder
+    void initBinder(WebDataBinder webDataBinder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
 }

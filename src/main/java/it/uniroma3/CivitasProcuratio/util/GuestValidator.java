@@ -20,6 +20,8 @@ public class GuestValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "Non deve essere vuoto");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "Non deve essere vuoto");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "Non deve essere vuoto");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nationality", "Non deve essere vuoto");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "checkInDate", "Non deve essere vuoto");
     }
 
 }

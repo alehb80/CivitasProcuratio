@@ -44,8 +44,8 @@ public class GuestService {
         List<Guest> guests = (List<Guest>) this.guestDAO.findAll();
         for (Guest g : guests) {
             if (g.getFirstName().equals(guest.getFirstName()) && g.getLastName().equals(guest.getLastName()) &&
-                    g.getGender().equals(guest.getGender()) &&
-                    g.getDateOfBirth().compareTo(guest.getDateOfBirth()) == 0)
+                    g.getDateOfBirth().compareTo(guest.getDateOfBirth()) == 0 &&
+                    g.getGender().equals(guest.getGender()) && g.getNationality().equals(guest.getNationality()))
                 return true;
         }
         return false;

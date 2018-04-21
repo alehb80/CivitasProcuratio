@@ -34,6 +34,13 @@ public class Guest {
     @Column(nullable = false, name="gender")
     private String gender;
 
+    @Column(nullable = false, name="nationality")
+    private String nationality;
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name="checkInDate")
+    private Date checkInDate;
+
     @ManyToOne
     @JoinColumn(name = "structure_id")
     private Structure structure;
@@ -45,12 +52,14 @@ public class Guest {
         this.activities = new ArrayList<>();
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, Structure structure, List<Activity> activities) {
+    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Structure structure, List<Activity> activities) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.age = age;
         this.gender = gender;
+        this.nationality = nationality;
+        this.checkInDate = checkInDate;
         this.structure = structure;
         this.activities = activities;
     }
@@ -103,6 +112,22 @@ public class Guest {
         this.gender = gender;
     }
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
     public Structure getStructure() {
         return structure;
     }
@@ -123,7 +148,7 @@ public class Guest {
     public String toString() {
         return this.firstName + " " + this.lastName + " " + this.dateOfBirth + " "
                 + DateUtils.ageCalculator(this.dateOfBirth) + " "
-                + this.getGender();
+                + this.getGender() + " " + this.nationality + " " + this.checkInDate;
     }
 
 }

@@ -133,6 +133,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Nationality</label>
+                                                    <input type="text" placeholder="Nationality" name="nationality" th:field="*{nationality}" required="required"/>
+                                                    <span th:if="${#fields.hasErrors('nationality')}">Errore: campo obbligatorio</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Data Di Arrivo</label>
+                                                    <input id="checkInDate" name="checkInDate" type="date" th:field="*{checkInDate}" required="required" title="checkInDate"/>
+                                                    <span th:if="${#fields.hasErrors('checkInDate')}">Errore: campo obbligatorio</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Aggiungi</button>
                                         <div class="clearfix"></div>
                                     </form>

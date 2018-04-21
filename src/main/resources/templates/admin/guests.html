@@ -98,6 +98,8 @@
                                             <th>Cognome</th>
                                             <th>Data Di Nascita</th>
                                             <th>Sesso</th>
+                                            <th>Nazionalità</th>
+                                            <th>Data Di Arrivo</th>
                                         </thead>
                                         <tbody>
                                             <tr th:each="guest : ${guests}">
@@ -105,6 +107,8 @@
                                                 <td th:text="${guest.lastName}"></td>
                                                 <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
                                                 <td th:text="${guest.gender}"></td>
+                                                <td th:text="${guest.nationality}"></td>
+                                                <td th:text="${#dates.format(guest.checkInDate, 'dd-MM-yyyy')}"></td>
                                                 <td>
                                                     <div>
                                                         <a th:href="@{'/admin/showUpdateGuest'  + '/' + ${guest.id}}">Modifica</a>
