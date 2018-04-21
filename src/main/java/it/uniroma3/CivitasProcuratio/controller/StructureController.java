@@ -39,7 +39,7 @@ public class StructureController {
     public String newStructure(@Valid @ModelAttribute("structure") Structure structure, Model model, BindingResult bindingResult) {
         this.validator.validate(structure, bindingResult);
         if (this.structureService.alreadyExists(structure)) {
-            model.addAttribute("message", "*ATTENZIONE: struttura inserita già esistente*");
+            model.addAttribute("message", "*ATTENZIONE: CAS già esistente*");
             return "superadmin/structureAdd";
         }
         else {
@@ -56,7 +56,7 @@ public class StructureController {
     public String updateStructure(@Valid @ModelAttribute("structure") Structure structure, Model model, BindingResult bindingResult) {
         this.validator.validate(structure, bindingResult);
         if (this.structureService.alreadyExists(structure)) {
-            model.addAttribute("message", "*ATTENZIONE: struttura inserita già esistente*");
+            model.addAttribute("message", "*ATTENZIONE: CAS già esistente*");
             return "superadmin/updateStructure";
         }
         else {
@@ -73,7 +73,7 @@ public class StructureController {
     public String deleteStructure(@PathVariable("id") Long id, Model model) {
         Structure structure = this.structureService.findOne(id);
         if (!structure.getGuests().isEmpty()) {
-            model.addAttribute("message", "*Non è possibile eliminare la struttura: contiene ospiti!*");
+            model.addAttribute("message", "*Impossibile eliminare il CAS: contiene ospiti!*");
             model.addAttribute("structures", this.structureService.findAll());
             return "superadmin/structuresManagement";
         }

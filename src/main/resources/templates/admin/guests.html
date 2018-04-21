@@ -41,7 +41,7 @@
                     <li>
                         <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
                             <i class="material-icons">content_paste</i>
-                            <p>Struttura</p>
+                            <p>CAS</p>
                         </a>
                     </li>
                     <li class="active">
@@ -113,7 +113,7 @@
                                                 <td>
                                                     <form th:action="@{'/admin/guestDelete' + '/' + ${guest.id}}" method="post">
                                                         <div class="input">
-                                                            <input type="submit" value="Elimina" />
+                                                            <input type="submit" value="Dismetti" />
                                                         </div>
                                                     </form>
                                                 </td>

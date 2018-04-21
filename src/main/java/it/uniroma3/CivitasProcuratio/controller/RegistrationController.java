@@ -35,7 +35,7 @@ public class RegistrationController {
     public String showForm(@PathVariable("id") Long id, Model model) {
         Structure structure = this.structureService.findOne(id);
         if (structure.getUser() != null) {
-            model.addAttribute("message", "*ATTENZIONE: esiste già un Amministratore per questa struttura*");
+            model.addAttribute("message", "*ATTENZIONE: esiste già un Amministratore per questo CAS*");
             model.addAttribute("structures", this.structureService.findAll());
             return "superadmin/structuresManagement";
         }
@@ -54,7 +54,7 @@ public class RegistrationController {
         user.setStructure(structure);
         user.setRole("ROLE_ADMIN");
         if (this.userService.alreadyExists(user)) {
-            model.addAttribute("message", "*ATTENZIONE: esiste già un Admin con questo username/email*");
+            model.addAttribute("message", "*ATTENZIONE: esiste già un Amministratore con questo username/email*");
             return "superadmin/adminAdd";
         } else {
             if (!bindingResult.hasErrors()) {
@@ -121,7 +121,7 @@ public class RegistrationController {
     @RequestMapping("/superadmin/adminInfo/{id}")
     public String adminInfo(@PathVariable("id") Long id, Model model) {
         if (this.userService.findByStructure(this.structureService.findOne(id)) == null) {
-            model.addAttribute("message", "*Nessun admin assegnato alla struttura*");
+            model.addAttribute("message", "*Nessun Aministratore assegnato al CAS*");
             model.addAttribute("structures", this.structureService.findAll());
             return "superadmin/structuresManagement";
         }

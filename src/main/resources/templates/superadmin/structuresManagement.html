@@ -41,7 +41,7 @@
                     <li class="active">
                         <a th:href="@{/superadmin/structuresManagement}">
                             <i class="material-icons">content_paste</i>
-                            <p>Lista Strutture</p>
+                            <p>CAS</p>
                         </a>
                     </li>
                     <li class="active-pro">
@@ -76,7 +76,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
-                                    <h4 class="title">Lista Strutture</h4>
+                                    <h4 class="title">Lista CAS</h4>
                                     <p th:text="${message}"></p>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -97,10 +97,10 @@
                                                     <a th:href="@{'/superadmin/showUpdateStructure' + '/' + ${structure.id}}">Modifica</a>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/adminForm' + '/' + ${structure.id}}">Aggiungi admin</a>
+                                                    <a th:href="@{'/superadmin/adminForm' + '/' + ${structure.id}}">Aggiungi Amministratore</a>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/adminInfo' + '/' + ${structure.id}}">Info admin</a>
+                                                    <a th:href="@{'/superadmin/adminInfo' + '/' + ${structure.id}}">Info Amministratore</a>
                                                 </td>
                                                 <td>
                                                     <a th:href="@{'/superadmin/insertDate' + '/' + ${structure.id}}">Presenze</a>
@@ -108,7 +108,7 @@
                                                 <td>
                                                     <form th:action="@{'/superadmin/structureDelete' + '/' + ${structure.id}}" method="post">
                                                         <div class="input">
-                                                            <input type="submit" value="Elimina" />
+                                                            <input type="submit" value="Dismetti" />
                                                         </div>
                                                     </form>
                                                 </td>
@@ -116,7 +116,7 @@
                                         </tbody>
                                     </table>
                                     <div>
-                                        <a th:href="@{/superadmin/structureAdd}">Aggiungi Struttura</a>
+                                        <a th:href="@{/superadmin/structureAdd}">Aggiungi CAS</a>
                                     </div>
                                 </div>
                             </div>
