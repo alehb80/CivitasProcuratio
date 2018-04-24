@@ -857,6 +857,17 @@ h2.title {
     left: 0;
     z-index: 2;
 }
+#para1 {
+    background-color: #009688;
+}
+
+#para2 {
+    background-color: #607D8B;
+}
+
+#para3 {
+    background-color: #4CAF50;
+}
 
 .sidebar:before,
 .off-canvas-sidebar:before {
