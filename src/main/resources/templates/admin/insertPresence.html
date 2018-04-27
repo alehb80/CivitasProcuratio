@@ -107,10 +107,10 @@
                                             <td th:text="${guest.lastName}"></td>
                                             <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
                                             <td>
-                                                <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${activityDate}}" method="POST" th:object="${activity}">
-                                                    <input type="radio" th:field="*{value}" th:value="SI" />
+                                                <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${presenceDate}}" method="POST" th:object="${presence}">
+                                                    <input type="radio" th:value="SI" />
                                                     <label>SI</label>
-                                                    <input type="radio" th:field="*{value}" th:value="NO" />
+                                                    <input type="radio" th:value="NO" />
                                                     <label>NO</label>
                                             <td>
                                                 <button type="submit">Conferma</button>

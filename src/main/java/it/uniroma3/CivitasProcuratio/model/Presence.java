@@ -6,20 +6,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="attivita")
+@Table(name="presenze")
 @Proxy(lazy = false)
-public class Activity {
+public class Presence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
-
-    @Column(nullable = false, name="name")
-    private String name;
-
-    @Column(nullable = false, name="value")
-    private String value;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false, name="date")
@@ -29,12 +23,10 @@ public class Activity {
     @JoinColumn(name = "guest_id")
     private Guest guest;
 
-    public Activity() {
+    public Presence() {
     }
 
-    public Activity(String name, String value, Date date, Guest guest) {
-        this.name = name;
-        this.value = value;
+    public Presence(Date date, Guest guest) {
         this.date = date;
         this.guest = guest;
     }
@@ -45,22 +37,6 @@ public class Activity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public Date getDate() {

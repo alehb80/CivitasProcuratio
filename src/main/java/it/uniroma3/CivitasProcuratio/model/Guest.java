@@ -46,13 +46,13 @@ public class Guest {
     private Structure structure;
 
     @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
-    private List<Activity> activities;
+    private List<Presence> presences;
 
     public Guest() {
-        this.activities = new ArrayList<>();
+        this.presences = new ArrayList<>();
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Structure structure, List<Activity> activities) {
+    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Structure structure, List<Presence> presences) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -61,7 +61,7 @@ public class Guest {
         this.nationality = nationality;
         this.checkInDate = checkInDate;
         this.structure = structure;
-        this.activities = activities;
+        this.presences = presences;
     }
 
     public Long getId() {
@@ -136,12 +136,12 @@ public class Guest {
         this.structure = structure;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Presence> getPresences() {
+        return presences;
     }
 
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public void setPresences(List<Presence> presences) {
+        this.presences = presences;
     }
 
     @Override

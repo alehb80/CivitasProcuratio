@@ -110,10 +110,10 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="activityDate">Data</label>
+                                                        <label for="presenceDate">Data</label>
                                                         <div class="input-group">
-                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
-                                                                <input id="activityDate" name="activityDate" type="date" required="required" title="activityDate"/>
+                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${structure.id}}" method="POST" th:object="${presenceDate}">
+                                                                <input id="presenceDate" name="presenceDate" type="date" required="required" title="presenceDate"/>
                                                                 <button type="submit">Conferma</button>
                                                             </form>
                                                         </div>

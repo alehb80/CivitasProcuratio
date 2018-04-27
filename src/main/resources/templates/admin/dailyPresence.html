@@ -98,19 +98,17 @@
                                             <th>Ospite</th>
                                             <th>Nome</th>
                                             <th>Cognome</th>
-                                            <th>Presenza</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="activity : ${activities}">
-                                            <td th:text="${activity.guest.id}"></td>
-                                            <td th:text="${activity.guest.firstName}"></td>
-                                            <td th:text="${activity.guest.lastName}"></td>
-                                            <td th:text="${activity.value}"></td>
+                                        <tr th:each="presence : ${presences}">
+                                            <td th:text="${presence.guest.id}"></td>
+                                            <td th:text="${presence.guest.firstName}"></td>
+                                            <td th:text="${presence.guest.lastName}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                     <div>
-                                        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${activityDate}}">Aggiorna Presenze</a>
+                                        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${presenceDate}}">Aggiorna Presenze</a>
                                     </div>
                                 </div>
                             </div>

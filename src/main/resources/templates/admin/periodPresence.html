@@ -98,15 +98,13 @@
                                         <th>Nome</th>
                                         <th>Cognome</th>
                                         <th>Nazionalità</th>
-                                        <th>Presenza</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="activity : ${activities}">
-                                            <td th:text="${activity.guest.id}"></td>
-                                            <td th:text="${activity.guest.firstName}"></td>
-                                            <td th:text="${activity.guest.lastName}"></td>
-                                            <td th:text="${activity.guest.nationality}"></td>
-                                            <td th:text="${activity.value}"></td>
+                                        <tr th:each="presence : ${presences}">
+                                            <td th:text="${presence.guest.id}"></td>
+                                            <td th:text="${presence.guest.firstName}"></td>
+                                            <td th:text="${presence.guest.lastName}"></td>
+                                            <td th:text="${presence.guest.nationality}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
