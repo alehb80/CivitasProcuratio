@@ -92,35 +92,29 @@
                                     <p th:text="${message}"></p>
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                            <th>Id</th>
-                                            <th>Nome</th>
-                                            <th>Cognome</th>
-                                            <th>Data Di Nascita</th>
-                                            <th>Presenza</th>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="guest : ${guests}">
-                                            <td th:text="${guest.id}"></td>
-                                            <td th:text="${guest.firstName}"></td>
-                                            <td th:text="${guest.lastName}"></td>
-                                            <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                                            <td>
-                                                <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${presenceDate}}" method="POST" th:object="${presence}">
-                                                    <input type="radio" th:value="SI" />
-                                                    <label>SI</label>
-                                                    <input type="radio" th:value="NO" />
-                                                    <label>NO</label>
-                                            <td>
-                                                <button type="submit">Conferma</button>
-                                                <span th:if="${#fields.hasErrors('value')}">Errore: campo obbligatorio</span>
-                                            </td>
-                                            </form>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <form th:action="@{'/admin/insertPresence' + '/' + ${structure.id} + '/' + ${presenceDate}}" method="POST" th:object="${activityForm}">
+                                        <table class="table">
+                                            <thead class="text-primary">
+                                                <th>Id</th>
+                                                <th>Nome</th>
+                                                <th>Cognome</th>
+                                                <th>Data Di Nascita</th>
+                                                <th>Presenza</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="guest : ${guests}">
+                                                <td th:text="${guest.id}"></td>
+                                                <td th:text="${guest.firstName}"></td>
+                                                <td th:text="${guest.lastName}"></td>
+                                                <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <input type="checkbox" th:field="*{checkedGuests}" th:value="${guest.id}" />
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="submit">Conferma</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

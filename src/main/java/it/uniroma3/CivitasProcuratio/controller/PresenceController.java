@@ -1,11 +1,12 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
+import it.uniroma3.CivitasProcuratio.model.ActivityForm;
+import it.uniroma3.CivitasProcuratio.model.Guest;
 import it.uniroma3.CivitasProcuratio.model.Presence;
 import it.uniroma3.CivitasProcuratio.model.Structure;
 import it.uniroma3.CivitasProcuratio.service.PresenceService;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
 import it.uniroma3.CivitasProcuratio.service.StructureService;
-import it.uniroma3.CivitasProcuratio.util.PresenceValidator;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,9 +35,6 @@ public class PresenceController {
 
     @Autowired
     private PresenceService presenceService;
-
-    @Autowired
-    private PresenceValidator validator;
 
     @RequestMapping(value = "/admin/insertDate/{id}", method = RequestMethod.GET)
     public String showFormDate(@PathVariable("id") Long id, Model model){
@@ -70,42 +69,64 @@ public class PresenceController {
     public String showFormPresence(@PathVariable("id") Long id, Model model, @PathVariable("presenceDate") String presenceDate) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
-        model.addAttribute("myDate", myDate);
         Structure structure = this.structureService.findOne(id);
+
+        List<Guest> guests = this.guestService.findByStructure(structure);
+        List<Long> ids = new ArrayList<>();
+
+        for(Guest g : guests) {
+            ids.add(g.getId());
+        }
+
+        model.addAttribute("myDate", myDate);
         model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+        model.addAttribute("guests", guests);
+        model.addAttribute("activityForm", new ActivityForm());
         model.addAttribute("presenceDate", presenceDate);
         model.addAttribute("presence", new Presence());
         return "admin/insertPresence";
     }
 
-    @RequestMapping(value = "/admin/insertPresence/{id1}/{id2}/{presenceDate}", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/insertPresence/{id1}/{presenceDate}", method = RequestMethod.POST)
     public String insertPresence(@PathVariable("id1") Long idStructure,
-                                 @PathVariable("id2") Long idGuest,
                                  @PathVariable("presenceDate") String presenceDate,
+                                 @ModelAttribute("activityForm") ActivityForm activityForm,
                                  @Valid @ModelAttribute("presence") Presence presence,
                                  Model model, BindingResult bindingResult) throws ParseException {
-        this.validator.validate(presence, bindingResult);
         Structure structure = this.structureService.findOne(idStructure);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
+
         model.addAttribute("myDate", myDate);
-        presence.setDate(myDate);
-        presence.setGuest(this.guestService.findOne(idGuest));
         model.addAttribute("structure", structure);
         model.addAttribute("guests", this.guestService.findByStructure(structure));
-        model.addAttribute("presence", presence);
-        if (this.presenceService.alreadyExists(presence, myDate)) {
-            model.addAttribute("message", "*ATTENZIONE: esiste già una presenza per la data selezionata!");
-            return "admin/insertPresence";
-        }
-        else {
-            if (!bindingResult.hasErrors()) {
-                this.presenceService.save(presence);
-                return "redirect:/admin/showInsertPresence/{id1}/{presenceDate}";
+        model.addAttribute("activityForm", new ActivityForm());
+
+        List<Long> checkedIds = activityForm.getCheckedGuests();
+
+        for(Long id : checkedIds) {
+            presence = new Presence();
+            presence.setDate(myDate);
+            presence.setGuest(this.guestService.findOne(id));
+
+            //checking for duplicates presence
+            List<Presence> ps = this.presenceService.findByGuest(this.guestService.findOne(id));
+            boolean duplicate = false;
+            for(Presence p : ps) {
+                if(p.getDate().equals(myDate)) {
+                    duplicate = true;
+                    break;
+                }
             }
+            if(duplicate) {
+                continue;
+            }
+
+            //if no duplicate
+            this.presenceService.save(presence);
         }
-        return "admin/insertPresence";
+
+        return "redirect:/admin/showInsertPresence/{id1}/{presenceDate}";
     }
 
     @RequestMapping(value = "/admin/periodPresence/{id}", method = RequestMethod.POST)
