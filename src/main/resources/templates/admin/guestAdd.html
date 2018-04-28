@@ -39,19 +39,19 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">content_paste</i>
                             <p>CAS</p>
                         </a>
                     </li>
                     <li class="active">
-                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>
                             <p>Ospiti</p>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">grid_on</i>
                             <p>Presenze</p>
                         </a>
@@ -92,7 +92,7 @@
                                     <p th:text="${message}"></p>
                                 </div>
                                 <div class="card-content">
-                                    <form th:action="@{'/admin/guestAdd' + '/' + ${guest.structure.id}}" method="POST" th:object="${guest}">
+                                    <form th:action="@{'/admin/guestAdd' + '/' + ${guest.cas.id}}" method="POST" th:object="${guest}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">

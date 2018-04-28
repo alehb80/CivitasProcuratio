@@ -80,7 +80,7 @@
                                     <p th:text="${message}"></p>
                                 </div>
                                 <div class="card-content">
-                                    <form th:action="@{'/superadmin/adminAdd' + '/' + ${user.structure.id}}" method="POST" th:object="${user}">
+                                    <form th:action="@{'/superadmin/adminAdd' + '/' + ${user.cas.id}}" method="POST" th:object="${user}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">

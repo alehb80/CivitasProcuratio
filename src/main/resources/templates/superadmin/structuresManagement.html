@@ -88,25 +88,25 @@
                                             <th>Numero Telefonico</th>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="structure : ${structures}">
-                                                <td th:text="${structure.name}"></td>
-                                                <td th:text="${structure.category}"></td>
-                                                <td th:text="${structure.site}"></td>
-                                                <td th:text="${structure.phoneNumber}"></td>
+                                            <tr th:each="cas : ${casList}">
+                                                <td th:text="${cas.name}"></td>
+                                                <td th:text="${cas.category}"></td>
+                                                <td th:text="${cas.site}"></td>
+                                                <td th:text="${cas.phoneNumber}"></td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/showUpdateStructure' + '/' + ${structure.id}}">Modifica</a>
+                                                    <a th:href="@{'/superadmin/showUpdateStructure' + '/' + ${cas.id}}">Modifica</a>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/adminForm' + '/' + ${structure.id}}">Aggiungi Amministratore</a>
+                                                    <a th:href="@{'/superadmin/adminForm' + '/' + ${cas.id}}">Aggiungi Amministratore</a>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/adminInfo' + '/' + ${structure.id}}">Info Amministratore</a>
+                                                    <a th:href="@{'/superadmin/adminInfo' + '/' + ${cas.id}}">Info Amministratore</a>
                                                 </td>
                                                 <td>
-                                                    <a th:href="@{'/superadmin/insertDate' + '/' + ${structure.id}}">Presenze</a>
+                                                    <a th:href="@{'/superadmin/insertDate' + '/' + ${cas.id}}">Presenze</a>
                                                 </td>
                                                 <td>
-                                                    <form th:action="@{'/superadmin/structureDelete' + '/' + ${structure.id}}" method="post">
+                                                    <form th:action="@{'/superadmin/structureDelete' + '/' + ${cas.id}}" method="post">
                                                         <div class="input">
                                                             <input type="submit" value="Dismetti" />
                                                         </div>

@@ -1,9 +1,9 @@
 package it.uniroma3.CivitasProcuratio;
 
 import it.uniroma3.CivitasProcuratio.dao.PresenceDAO;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
 import it.uniroma3.CivitasProcuratio.model.Presence;
-import it.uniroma3.CivitasProcuratio.model.Structure;
 import it.uniroma3.CivitasProcuratio.service.PresenceService;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,12 +28,12 @@ public class PresenceTest {
 
     @Before
     public void setUp() {
-        Structure structure = new Structure();
-        structure.setId(new Long(1));
+        Cas cas = new Cas();
+        cas.setId(new Long(1));
 
         Guest guest = new Guest();
         guest.setId(new Long(1));
-        guest.setStructure(structure);
+        guest.setCas(cas);
 
         Presence presence = new Presence();
         presence.setId(new Long(1));

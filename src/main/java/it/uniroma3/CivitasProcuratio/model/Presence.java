@@ -23,6 +23,10 @@ public class Presence {
     @JoinColumn(name = "guest_id")
     private Guest guest;
 
+    @ManyToOne
+    @JoinColumn(name = "attendance_sheet_id")
+    private AttendanceSheet attendanceSheet;
+
     public Presence() {
     }
 
@@ -53,6 +57,14 @@ public class Presence {
 
     public void setGuest(Guest guest) {
         this.guest = guest;
+    }
+
+    public AttendanceSheet getAttendanceSheet() {
+        return attendanceSheet;
+    }
+
+    public void setAttendanceSheet(AttendanceSheet attendanceSheet) {
+        this.attendanceSheet = attendanceSheet;
     }
 
 }

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="strutture")
+@Table(name="cas")
 @Proxy(lazy = false)
-public class Structure {
+public class Cas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,22 +28,28 @@ public class Structure {
     @Column(nullable = false, name="phoneNumber")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "structure", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cas")
     private List<Guest> guests;
 
-    @OneToOne(mappedBy="structure", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy="cas", cascade = CascadeType.REMOVE)
     private User user;
 
-    public Structure() {
+    @OneToMany(mappedBy = "cas")
+    private List<AttendanceSheet> attendanceSheets;
+
+    public Cas() {
         this.guests = new ArrayList<>();
+        this.attendanceSheets = new ArrayList<>();
     }
 
-    public Structure(String name, String category, String site, String phoneNumber, List<Guest> guests) {
+    public Cas(String name, String category, String site, String phoneNumber, List<Guest> guests, User user, List<AttendanceSheet> attendanceSheets) {
         this.name = name;
         this.category = category;
         this.site = site;
         this.guests = guests;
         this.phoneNumber = phoneNumber;
+        this.user = user;
+        this.attendanceSheets = attendanceSheets;
     }
 
     public Long getId() {
@@ -102,10 +108,19 @@ public class Structure {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<AttendanceSheet> getAttendanceSheets() {
+        return attendanceSheets;
+    }
+
+    public void setAttendanceSheets(List<AttendanceSheet> attendanceSheets) {
+        this.attendanceSheets = attendanceSheets;
+    }
+
     @Override
     public String toString() {
         return "NOME: " + this.name + " " + "CATEGORIA: " + this.category + " " +
                 "UBICAZIONE: " + this.site + " " + "NUMERO TELEFONICO: " +
                 this.phoneNumber;
     }
+
 }

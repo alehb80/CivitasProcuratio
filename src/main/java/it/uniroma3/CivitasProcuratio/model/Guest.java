@@ -42,17 +42,21 @@ public class Guest {
     private Date checkInDate;
 
     @ManyToOne
-    @JoinColumn(name = "structure_id")
-    private Structure structure;
+    @JoinColumn(name = "cas_id")
+    private Cas cas;
 
     @OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
     private List<Presence> presences;
+
+    @ManyToOne
+    @JoinColumn(name = "migrant_id")
+    private Migrant migrant;
 
     public Guest() {
         this.presences = new ArrayList<>();
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Structure structure, List<Presence> presences) {
+    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Cas cas, List<Presence> presences, Migrant migrant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -60,8 +64,9 @@ public class Guest {
         this.gender = gender;
         this.nationality = nationality;
         this.checkInDate = checkInDate;
-        this.structure = structure;
+        this.cas = cas;
         this.presences = presences;
+        this.migrant = migrant;
     }
 
     public Long getId() {
@@ -128,12 +133,12 @@ public class Guest {
         this.checkInDate = checkInDate;
     }
 
-    public Structure getStructure() {
-        return structure;
+    public Cas getCas() {
+        return cas;
     }
 
-    public void setStructure(Structure structure) {
-        this.structure = structure;
+    public void setCas(Cas cas) {
+        this.cas = cas;
     }
 
     public List<Presence> getPresences() {
@@ -142,6 +147,14 @@ public class Guest {
 
     public void setPresences(List<Presence> presences) {
         this.presences = presences;
+    }
+
+    public Migrant getMigrant() {
+        return migrant;
+    }
+
+    public void setMigrant(Migrant migrant) {
+        this.migrant = migrant;
     }
 
     @Override

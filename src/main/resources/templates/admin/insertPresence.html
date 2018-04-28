@@ -39,19 +39,19 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">content_paste</i>
                             <p>CAS</p>
                         </a>
                     </li>
                     <li class="active">
-                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>
                             <p>Ospiti</p>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">grid_on</i>
                             <p>Presenze</p>
                         </a>
@@ -89,10 +89,10 @@
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">Inserisci presenze</h4>
-                                    <p th:text="${message}"></p>
+                                    <!-- <p th:text="${message}"></p> -->
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <form th:action="@{'/admin/insertPresence' + '/' + ${structure.id} + '/' + ${presenceDate}}" method="POST" th:object="${activityForm}">
+                                    <form th:action="@{'/admin/insertPresence' + '/' + ${cas.id} + '/' + ${presenceDate}}" method="POST" th:object="${presenceForm}">
                                         <table class="table">
                                             <thead class="text-primary">
                                                 <th>Id</th>

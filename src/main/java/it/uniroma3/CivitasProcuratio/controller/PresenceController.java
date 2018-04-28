@@ -1,12 +1,12 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
-import it.uniroma3.CivitasProcuratio.model.ActivityForm;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
 import it.uniroma3.CivitasProcuratio.model.Presence;
-import it.uniroma3.CivitasProcuratio.model.Structure;
+import it.uniroma3.CivitasProcuratio.model.PresenceForm;
+import it.uniroma3.CivitasProcuratio.service.CasService;
 import it.uniroma3.CivitasProcuratio.service.PresenceService;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
-import it.uniroma3.CivitasProcuratio.service.StructureService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ import java.util.List;
 public class PresenceController {
 
     @Autowired
-    private StructureService structureService;
+    private CasService casService;
 
     @Autowired
     private GuestService guestService;
@@ -39,7 +39,7 @@ public class PresenceController {
     @RequestMapping(value = "/admin/insertDate/{id}", method = RequestMethod.GET)
     public String showFormDate(@PathVariable("id") Long id, Model model){
         model.addAttribute("presenceDate", new Date());
-        model.addAttribute("structure", this.structureService.findOne(id));
+        model.addAttribute("cas", this.casService.findOne(id));
         model.addAttribute("from", new Date());
         model.addAttribute("to", new Date());
         return "admin/insertDate";
@@ -47,12 +47,12 @@ public class PresenceController {
 
     @RequestMapping(value = "/admin/dailyPresence/{id}", method = RequestMethod.POST)
     public String showReport(@PathVariable("id") Long id, Model model, @ModelAttribute("presenceDate") String presenceDate) throws ParseException {
-        Structure structure = structureService.findOne(id);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+        Cas cas = casService.findOne(id);
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
-        List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByStructure(structure), myDate);
+        List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByCas(cas), myDate);
         model.addAttribute("myDate", myDate);
         model.addAttribute("presences", presences);
         model.addAttribute("presenceDate", presenceDate);
@@ -69,9 +69,9 @@ public class PresenceController {
     public String showFormPresence(@PathVariable("id") Long id, Model model, @PathVariable("presenceDate") String presenceDate) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
-        Structure structure = this.structureService.findOne(id);
+        Cas cas = this.casService.findOne(id);
 
-        List<Guest> guests = this.guestService.findByStructure(structure);
+        List<Guest> guests = this.guestService.findByCas(cas);
         List<Long> ids = new ArrayList<>();
 
         for(Guest g : guests) {
@@ -79,30 +79,30 @@ public class PresenceController {
         }
 
         model.addAttribute("myDate", myDate);
-        model.addAttribute("structure", structure);
+        model.addAttribute("cas", cas);
         model.addAttribute("guests", guests);
-        model.addAttribute("activityForm", new ActivityForm());
+        model.addAttribute("presenceForm", new PresenceForm());
         model.addAttribute("presenceDate", presenceDate);
         model.addAttribute("presence", new Presence());
         return "admin/insertPresence";
     }
 
     @RequestMapping(value = "/admin/insertPresence/{id1}/{presenceDate}", method = RequestMethod.POST)
-    public String insertPresence(@PathVariable("id1") Long idStructure,
+    public String insertPresence(@PathVariable("id1") Long idCas,
                                  @PathVariable("presenceDate") String presenceDate,
-                                 @ModelAttribute("activityForm") ActivityForm activityForm,
+                                 @ModelAttribute("activityForm") PresenceForm presenceForm,
                                  @Valid @ModelAttribute("presence") Presence presence,
                                  Model model, BindingResult bindingResult) throws ParseException {
-        Structure structure = this.structureService.findOne(idStructure);
+        Cas cas = this.casService.findOne(idCas);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
 
         model.addAttribute("myDate", myDate);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
-        model.addAttribute("activityForm", new ActivityForm());
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
+        model.addAttribute("presenceForm", new PresenceForm());
 
-        List<Long> checkedIds = activityForm.getCheckedGuests();
+        List<Long> checkedIds = presenceForm.getCheckedGuests();
 
         for(Long id : checkedIds) {
             presence = new Presence();
@@ -126,15 +126,15 @@ public class PresenceController {
             this.presenceService.save(presence);
         }
 
-        return "redirect:/admin/showInsertPresence/{id1}/{presenceDate}";
+        return "admin/dailyPresence";
     }
 
     @RequestMapping(value = "/admin/periodPresence/{id}", method = RequestMethod.POST)
     public String insertPeriod(@PathVariable("id") Long id, Model model,
                                @ModelAttribute("from") String from,
                                @ModelAttribute("to") String to) throws ParseException {
-        Structure structure = this.structureService.findOne(id);
-        model.addAttribute("structure", structure);
+        Cas cas = this.casService.findOne(id);
+        model.addAttribute("cas", cas);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date from1 = sdf.parse(String.valueOf(from));
         Date to1 = sdf.parse(String.valueOf(to));
@@ -146,7 +146,7 @@ public class PresenceController {
             model.addAttribute("message", "*ATTENZIONE: le date inserite non sono conseguenti tra di loro!*");
             return "admin/insertDate";
         }
-        List<Presence> presences = this.presenceService.getPresenceBetweenPeriod(this.guestService.findByStructure(structure), from1, to1);
+        List<Presence> presences = this.presenceService.getPresenceBetweenPeriod(this.guestService.findByCas(cas), from1, to1);
         if (presences.isEmpty()) {
             model.addAttribute("message", "*Non ci sono presenze per la data scelta*");
             return "admin/insertDate";
@@ -156,8 +156,8 @@ public class PresenceController {
     }
 
     @RequestMapping(value = "/superadmin/insertDate/{id}", method = RequestMethod.GET)
-    public String showFormDateStructure(@PathVariable("id") Long id, Model model){
-        model.addAttribute("structure", this.structureService.findOne(id));
+    public String showFormDateCas(@PathVariable("id") Long id, Model model){
+        model.addAttribute("cas", this.casService.findOne(id));
         model.addAttribute("presenceDate", new Date());
         model.addAttribute("from", new Date());
         model.addAttribute("to", new Date());
@@ -165,13 +165,13 @@ public class PresenceController {
     }
 
     @RequestMapping(value = "/superadmin/dateStructure/{id}", method = RequestMethod.POST)
-    public String dateStructure(@PathVariable("id") Long id, Model model, @ModelAttribute("presenceDate") String presenceDate) throws ParseException {
-        Structure structure = structureService.findOne(id);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+    public String dateCas(@PathVariable("id") Long id, Model model, @ModelAttribute("presenceDate") String presenceDate) throws ParseException {
+        Cas cas = casService.findOne(id);
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate = sdf.parse(String.valueOf(presenceDate));
-        List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByStructure(structure), myDate);
+        List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByCas(cas), myDate);
         model.addAttribute("presences", presences);
         model.addAttribute("presenceDate", presenceDate);
         if (presences.isEmpty())
@@ -185,11 +185,11 @@ public class PresenceController {
     }
 
     @RequestMapping(value = "/superadmin/periodStructure/{id}", method = RequestMethod.POST)
-    public String periodStructure(@PathVariable("id") Long id, Model model,
+    public String periodCas(@PathVariable("id") Long id, Model model,
                                   @ModelAttribute("from") String from,
                                   @ModelAttribute("to") String to) throws ParseException {
-        Structure structure = this.structureService.findOne(id);
-        model.addAttribute("structure", structure);
+        Cas cas = this.casService.findOne(id);
+        model.addAttribute("cas", cas);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date from1 = sdf.parse(String.valueOf(from));
         Date to1 = sdf.parse(String.valueOf(to));
@@ -201,7 +201,7 @@ public class PresenceController {
             model.addAttribute("text", "*ATTENZIONE: le date inserite non sono conseguenti tra di loro!*");
             return "superadmin/dateStructure";
         }
-        List<Presence> presences = this.presenceService.getPresenceBetweenPeriod(this.guestService.findByStructure(structure), from1, to1);
+        List<Presence> presences = this.presenceService.getPresenceBetweenPeriod(this.guestService.findByCas(cas), from1, to1);
         if (presences.isEmpty()) {
             model.addAttribute("text", "*Non ci sono presenze per la data scelta*");
             return "superadmin/dateStructure";
@@ -215,7 +215,7 @@ public class PresenceController {
     public String signatureSheet(@PathVariable("id") Long id, Model model) {
         Date date = new Date();
         model.addAttribute("date", date);
-        model.addAttribute("guests", this.guestService.findByStructure(this.structureService.findOne(id)));
+        model.addAttribute("guests", this.guestService.findByCas(this.casService.findOne(id)));
         return "admin/signatureSheet";
     }
 

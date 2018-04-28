@@ -1,7 +1,7 @@
 package it.uniroma3.CivitasProcuratio;
 
 import it.uniroma3.CivitasProcuratio.dao.UserDAO;
-import it.uniroma3.CivitasProcuratio.model.Structure;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.User;
 import it.uniroma3.CivitasProcuratio.service.UserService;
 import org.junit.Before;
@@ -59,14 +59,14 @@ public class UserTest {
 
     @Test
     public void whenValidStructure_thenUserShouldBeFound() {
-        Structure structure = new Structure();
+        Cas cas = new Cas();
         User user = new User();
-        user.setStructure(structure);
+        user.setCas(cas);
         UserService userServiceMock = mock(UserService.class);
-        when(userServiceMock.findByStructure(structure)).thenReturn(user);
-        User founds = userServiceMock.findByStructure(structure);
+        when(userServiceMock.findByCas(cas)).thenReturn(user);
+        User founds = userServiceMock.findByCas(cas);
 
-        assertThat(founds.getStructure()).isEqualTo(structure);
+        assertThat(founds.getCas()).isEqualTo(cas);
     }
 
 }
