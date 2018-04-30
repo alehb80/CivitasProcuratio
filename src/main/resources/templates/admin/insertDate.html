@@ -112,7 +112,7 @@
                                                     <div class="form-group">
                                                         <label for="presenceDate">Data</label>
                                                         <div class="input-group">
-                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${cas.id}}" method="POST" th:object="${presenceDate}">
+                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${cas.id}}" method="GET" th:object="${presenceDate}">
                                                                 <input id="presenceDate" name="presenceDate" type="date" required="required" title="presenceDate"/>
                                                                 <button type="submit">Conferma</button>
                                                             </form>
