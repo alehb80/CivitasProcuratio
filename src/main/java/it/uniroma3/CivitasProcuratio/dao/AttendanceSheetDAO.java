@@ -1,17 +1,17 @@
 package it.uniroma3.CivitasProcuratio.dao;
 
+import it.uniroma3.CivitasProcuratio.model.AttendanceSheet;
 import it.uniroma3.CivitasProcuratio.model.Cas;
-import it.uniroma3.CivitasProcuratio.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Repository
-public interface UserDAO extends CrudRepository<User, Long> {
+public interface AttendanceSheetDAO extends CrudRepository<AttendanceSheet, Long> {
 
-    User findByUsername(String username);
-
-    User findByCas(Cas cas);
+    List<AttendanceSheet> findByCas(Cas cas);
 
 }

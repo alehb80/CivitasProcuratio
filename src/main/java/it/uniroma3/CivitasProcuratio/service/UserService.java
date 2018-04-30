@@ -1,7 +1,7 @@
 package it.uniroma3.CivitasProcuratio.service;
 
 import it.uniroma3.CivitasProcuratio.dao.UserDAO;
-import it.uniroma3.CivitasProcuratio.model.Structure;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +41,8 @@ public class UserService {
     }
 
     @Transactional
-    public User findByStructure(Structure structure) {
-        return this.userDAO.findByStructure(structure);
+    public User findByCas(Cas cas) {
+        return this.userDAO.findByCas(cas);
     }
 
     public boolean alreadyExists(User user) {

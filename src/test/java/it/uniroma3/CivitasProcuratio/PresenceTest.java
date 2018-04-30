@@ -1,10 +1,10 @@
 package it.uniroma3.CivitasProcuratio;
 
-import it.uniroma3.CivitasProcuratio.dao.ActivityDAO;
-import it.uniroma3.CivitasProcuratio.model.Activity;
+import it.uniroma3.CivitasProcuratio.dao.PresenceDAO;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
-import it.uniroma3.CivitasProcuratio.model.Structure;
-import it.uniroma3.CivitasProcuratio.service.ActivityService;
+import it.uniroma3.CivitasProcuratio.model.Presence;
+import it.uniroma3.CivitasProcuratio.service.PresenceService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,35 +18,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ActivityTest {
+public class PresenceTest {
 
     @Autowired
-    private ActivityService activityService;
+    private PresenceService presenceService;
 
     @MockBean
-    private ActivityDAO activityDAO;
+    private PresenceDAO presenceDAO;
 
     @Before
     public void setUp() {
-        Structure structure = new Structure();
-        structure.setId(new Long(1));
+        Cas cas = new Cas();
+        cas.setId(new Long(1));
 
         Guest guest = new Guest();
         guest.setId(new Long(1));
-        guest.setStructure(structure);
+        guest.setCas(cas);
 
-        Activity activity = new Activity();
-        activity.setId(new Long(1));
-        activity.setGuest(guest);
+        Presence presence = new Presence();
+        presence.setId(new Long(1));
+        presence.setGuest(guest);
 
-        Mockito.when(this.activityDAO.findOne(new Long(1)))
-                .thenReturn(activity);
+        Mockito.when(this.presenceDAO.findOne(new Long(1)))
+                .thenReturn(presence);
     }
 
     @Test
     public void whenValidId_thenGuestShouldBeFound() {
         Long id = new Long(1);
-        Activity found = activityService.findOne(id);
+        Presence found = presenceService.findOne(id);
 
         assertThat(found.getId())
                 .isEqualTo(id);

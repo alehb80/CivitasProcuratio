@@ -1,8 +1,8 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
-import it.uniroma3.CivitasProcuratio.model.Structure;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.User;
-import it.uniroma3.CivitasProcuratio.service.StructureService;
+import it.uniroma3.CivitasProcuratio.service.CasService;
 import it.uniroma3.CivitasProcuratio.service.UserService;
 import it.uniroma3.CivitasProcuratio.util.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class RegistrationController {
     private UserService userService;
 
     @Autowired
-    private StructureService structureService;
+    private CasService casService;
 
     @Autowired
     private UserValidator validator;
@@ -33,15 +33,15 @@ public class RegistrationController {
 
     @RequestMapping(value = "/superadmin/adminForm/{id}", method = RequestMethod.GET)
     public String showForm(@PathVariable("id") Long id, Model model) {
-        Structure structure = this.structureService.findOne(id);
-        if (structure.getUser() != null) {
+        Cas cas = this.casService.findOne(id);
+        if (cas.getUser() != null) {
             model.addAttribute("message", "*ATTENZIONE: esiste già un Amministratore per questo CAS*");
-            model.addAttribute("structures", this.structureService.findAll());
+            model.addAttribute("casList", this.casService.findAll());
             return "superadmin/structuresManagement";
         }
         else {
             User user = new User();
-            user.setStructure(structure);
+            user.setCas(cas);
             model.addAttribute("user", user);
             return "superadmin/adminAdd";
         }
@@ -50,8 +50,8 @@ public class RegistrationController {
     @RequestMapping(value = "/superadmin/adminAdd/{id}", method = RequestMethod.POST)
     public String newAdmin(@PathVariable("id") Long id, @Valid @ModelAttribute("user") User user, Model model, BindingResult bindingResult) {
         this.validator.validate(user, bindingResult);
-        Structure structure = this.structureService.findOne(id);
-        user.setStructure(structure);
+        Cas cas = this.casService.findOne(id);
+        user.setCas(cas);
         user.setRole("ROLE_ADMIN");
         if (this.userService.alreadyExists(user)) {
             model.addAttribute("message", "*ATTENZIONE: esiste già un Amministratore con questo username/email*");
@@ -120,14 +120,14 @@ public class RegistrationController {
 
     @RequestMapping("/superadmin/adminInfo/{id}")
     public String adminInfo(@PathVariable("id") Long id, Model model) {
-        if (this.userService.findByStructure(this.structureService.findOne(id)) == null) {
+        if (this.userService.findByCas(this.casService.findOne(id)) == null) {
             model.addAttribute("message", "*Nessun Aministratore assegnato al CAS*");
-            model.addAttribute("structures", this.structureService.findAll());
+            model.addAttribute("casList", this.casService.findAll());
             return "superadmin/structuresManagement";
         }
         else {
-            Structure structure = this.structureService.findOne(id);
-            model.addAttribute("user", this.userService.findByStructure(structure));
+            Cas cas = this.casService.findOne(id);
+            model.addAttribute("user", this.userService.findByCas(cas));
             return "superadmin/adminInfo";
         }
     }

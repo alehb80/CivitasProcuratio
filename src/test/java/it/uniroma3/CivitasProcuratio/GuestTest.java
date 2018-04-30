@@ -1,8 +1,8 @@
 package it.uniroma3.CivitasProcuratio;
 
 import it.uniroma3.CivitasProcuratio.dao.GuestDAO;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
-import it.uniroma3.CivitasProcuratio.model.Structure;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,12 +32,12 @@ public class GuestTest {
 
     @Before
     public void setUp() {
-        Structure structure = new Structure();
-        structure.setId(new Long(1));
+        Cas cas = new Cas();
+        cas.setId(new Long(1));
 
         Guest guest = new Guest();
         guest.setId(new Long(1));
-        guest.setStructure(structure);
+        guest.setCas(cas);
 
         Mockito.when(guestDAO.findOne(new Long(1)))
                 .thenReturn(guest);
@@ -55,13 +55,13 @@ public class GuestTest {
     @Test
     public void whenValidStructure_thenGuestShouldBeFound() {
 
-        Structure structure = new Structure();
+        Cas cas = new Cas();
         Guest guest1 = new Guest();
         Guest guest2 = new Guest();
 
         GuestService guestServiceMock = mock(GuestService.class);
-        when(guestServiceMock.findByStructure(structure)).thenReturn(Arrays.asList(guest1, guest2));
-        List<Guest> founds = guestServiceMock.findByStructure(structure);
+        when(guestServiceMock.findByCas(cas)).thenReturn(Arrays.asList(guest1, guest2));
+        List<Guest> founds = guestServiceMock.findByCas(cas);
 
         assertThat(founds.size()).isEqualTo(2);
         assertThat(founds.contains(guest1)).isTrue();

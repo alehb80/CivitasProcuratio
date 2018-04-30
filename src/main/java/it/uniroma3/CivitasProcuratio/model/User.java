@@ -4,6 +4,8 @@ import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="utenti")
@@ -29,10 +31,11 @@ public class User {
     private String role;
 
     @OneToOne
-    @JoinColumn(name = "structure_id")
-    private Structure structure;
+    @JoinColumn(name = "cas_id")
+    private Cas cas;
 
     public User() {
+
     }
 
     public User(String username, String email, String password, String role) {
@@ -82,12 +85,12 @@ public class User {
         this.role = role;
     }
 
-    public Structure getStructure() {
-        return structure;
+    public Cas getCas() {
+        return cas;
     }
 
-    public void setStructure(Structure structure) {
-        this.structure = structure;
+    public void setCas(Cas cas) {
+        this.cas = cas;
     }
 
     @Override

@@ -49,19 +49,19 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">content_paste</i>
                             <p>CAS</p>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>
                             <p>Ospiti</p>
                         </a>
                     </li>
                     <li class="active">
-                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">grid_on</i>
                             <p>Presenze</p>
                         </a>
@@ -110,10 +110,10 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="activityDate">Data</label>
+                                                        <label for="presenceDate">Data</label>
                                                         <div class="input-group">
-                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
-                                                                <input id="activityDate" name="activityDate" type="date" required="required" title="activityDate"/>
+                                                            <form th:action="@{'/admin/dailyPresence' + '/' + ${cas.id}}" method="POST" th:object="${presenceDate}">
+                                                                <input id="presenceDate" name="presenceDate" type="date" required="required" title="presenceDate"/>
                                                                 <button type="submit">Conferma</button>
                                                             </form>
                                                         </div>
@@ -123,7 +123,7 @@
                                                     <div class="form-group">
                                                         <label>Periodo</label>
                                                         <div class="input-daterange input-group" id="datepicker-example-2">
-                                                            <form th:action="@{'/admin/periodPresence' + '/' + ${structure.id}}" method="POST">
+                                                            <form th:action="@{'/admin/periodPresence' + '/' + ${cas.id}}" method="POST">
                                                                 <span class="input-group-addon">Da</span>
                                                                 <input id="from" name="from" type="date" th:object="${from}" required="required" title="from"/>
                                                                 <span class="input-group-addon">A</span>
@@ -137,7 +137,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <a th:href="@{'/admin/signatureSheet' + '/' + ${structure.id}}">Stampa foglio firme</a>
+                                        <a th:href="@{'/admin/signatureSheet' + '/' + ${cas.id}}">Stampa foglio firme</a>
                                     </div>
                                 </div>
                             </div>

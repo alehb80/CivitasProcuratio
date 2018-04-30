@@ -87,12 +87,12 @@
                                             <th>Numero Telefonico</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="structure : ${structures}">
-                                            <td th:text="${structure.name}"></td>
-                                            <td th:text="${structure.category}"></td>
-                                            <td th:text="${structure.site}"></td>
-                                            <td th:text="${structure.phoneNumber}"></td>
-                                            <td><a th:href="@{'/user/guestList' + '/' + ${structure.id}}">Ospiti</a></td>
+                                        <tr th:each="cas : ${casList}">
+                                            <td th:text="${cas.name}"></td>
+                                            <td th:text="${cas.category}"></td>
+                                            <td th:text="${cas.site}"></td>
+                                            <td th:text="${cas.phoneNumber}"></td>
+                                            <td><a th:href="@{'/user/guestList' + '/' + ${cas.id}}">Ospiti</a></td>
                                         </tr>
                                         </tbody>
                                     </table>

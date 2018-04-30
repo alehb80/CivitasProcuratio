@@ -39,19 +39,19 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">content_paste</i>
                             <p>CAS</p>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>
                             <p>Ospiti</p>
                         </a>
                     </li>
                     <li class="active">
-                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">grid_on</i>
                             <p>Presenze</p>
                         </a>
@@ -98,19 +98,17 @@
                                             <th>Ospite</th>
                                             <th>Nome</th>
                                             <th>Cognome</th>
-                                            <th>Presenza</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="activity : ${activities}">
-                                            <td th:text="${activity.guest.id}"></td>
-                                            <td th:text="${activity.guest.firstName}"></td>
-                                            <td th:text="${activity.guest.lastName}"></td>
-                                            <td th:text="${activity.value}"></td>
+                                        <tr th:each="presence : ${presences}">
+                                            <td th:text="${presence.guest.id}"></td>
+                                            <td th:text="${presence.guest.firstName}"></td>
+                                            <td th:text="${presence.guest.lastName}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                     <div>
-                                        <a th:href="@{'/admin/showInsertPresence' + '/' + ${structure.id} + '/' + ${activityDate}}">Aggiorna Presenze</a>
+                                        <a th:href="@{'/admin/showInsertPresence' + '/' + ${cas.id} + '/' + ${presenceDate}}">Aggiorna Presenze</a>
                                     </div>
                                 </div>
                             </div>

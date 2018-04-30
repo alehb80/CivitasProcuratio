@@ -99,11 +99,11 @@
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="form-group">
-                                                        <label for="activityDate">Data</label>
+                                                        <label for="presenceDate">Data</label>
                                                         <div class="input-group">
-                                                            <form th:action="@{'/superadmin/dateStructure' + '/' + ${structure.id}}" method="POST" th:object="${activityDate}">
-                                                                <label for="activityDate"></label>
-                                                                <input id="activityDate" name="activityDate" type="date" required="required"/>
+                                                            <form th:action="@{'/superadmin/dateStructure' + '/' + ${cas.id}}" method="POST" th:object="${presenceDate}">
+                                                                <label for="presenceDate"></label>
+                                                                <input id="presenceDate" name="presenceDate" type="date" required="required"/>
                                                                 <button type="submit">Conferma</button>
                                                             </form>
                                                         </div>
@@ -113,7 +113,7 @@
                                                     <div class="form-group">
                                                         <label>Periodo</label>
                                                         <div class="input-daterange input-group" id="datepicker-example-2">
-                                                            <form th:action="@{'/superadmin/periodStructure' + '/' + ${structure.id}}" method="POST">
+                                                            <form th:action="@{'/superadmin/periodStructure' + '/' + ${cas.id}}" method="POST">
                                                                 <span class="input-group-addon">Da</span>
                                                                 <input id="from" name="from" type="date" th:object="${from}" required="required" title="from"/>
                                                                 <span class="input-group-addon">A</span>

@@ -1,8 +1,8 @@
 package it.uniroma3.CivitasProcuratio;
 
-import it.uniroma3.CivitasProcuratio.dao.StructureDAO;
-import it.uniroma3.CivitasProcuratio.model.Structure;
-import it.uniroma3.CivitasProcuratio.service.StructureService;
+import it.uniroma3.CivitasProcuratio.dao.CasDAO;
+import it.uniroma3.CivitasProcuratio.model.Cas;
+import it.uniroma3.CivitasProcuratio.service.CasService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,28 +16,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StructureTest {
+public class CasTest {
 
     @Autowired
-    private StructureService structureService;
+    private CasService casService;
 
 
     @MockBean
-    private StructureDAO structureDAO;
+    private CasDAO casDAO;
 
     @Before
     public void setUp() {
-        Structure structure = new Structure();
-        structure.setId(new Long(1));
+        Cas cas = new Cas();
+        cas.setId(new Long(1));
 
-        Mockito.when(structureDAO.findOne(new Long(1)))
-                .thenReturn(structure);
+        Mockito.when(casDAO.findOne(new Long(1)))
+                .thenReturn(cas);
     }
 
     @Test
     public void whenValidId_thenStructureShouldBeFound() {
         Long id = new Long(1);
-        Structure found = structureService.findOne(id);
+        Cas found = casService.findOne(id);
 
         assertThat(found.getId())
                 .isEqualTo(id);

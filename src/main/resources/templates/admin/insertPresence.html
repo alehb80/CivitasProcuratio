@@ -39,19 +39,19 @@
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/structureInfo' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">content_paste</i>
                             <p>CAS</p>
                         </a>
                     </li>
                     <li class="active">
-                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>
                             <p>Ospiti</p>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.structure.id}}">
+                        <a th:href="@{'/admin/insertDate' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">grid_on</i>
                             <p>Presenze</p>
                         </a>
@@ -89,38 +89,32 @@
                             <div class="card">
                                 <div class="card-header" data-background-color="blue">
                                     <h4 class="title">Inserisci presenze</h4>
-                                    <p th:text="${message}"></p>
+                                    <!-- <p th:text="${message}"></p> -->
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                            <th>Id</th>
-                                            <th>Nome</th>
-                                            <th>Cognome</th>
-                                            <th>Data Di Nascita</th>
-                                            <th>Presenza</th>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="guest : ${guests}">
-                                            <td th:text="${guest.id}"></td>
-                                            <td th:text="${guest.firstName}"></td>
-                                            <td th:text="${guest.lastName}"></td>
-                                            <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                                            <td>
-                                                <form th:action="@{'/admin/insertPresence' + '/' + ${guest.structure.id} + '/' + ${guest.id} + '/' + ${activityDate}}" method="POST" th:object="${activity}">
-                                                    <input type="radio" th:field="*{value}" th:value="SI" />
-                                                    <label>SI</label>
-                                                    <input type="radio" th:field="*{value}" th:value="NO" />
-                                                    <label>NO</label>
-                                            <td>
-                                                <button type="submit">Conferma</button>
-                                                <span th:if="${#fields.hasErrors('value')}">Errore: campo obbligatorio</span>
-                                            </td>
-                                            </form>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                    <form th:action="@{'/admin/insertPresence' + '/' + ${cas.id} + '/' + ${presenceDate}}" method="POST" th:object="${presenceForm}">
+                                        <table class="table">
+                                            <thead class="text-primary">
+                                                <th>Id</th>
+                                                <th>Nome</th>
+                                                <th>Cognome</th>
+                                                <th>Data Di Nascita</th>
+                                                <th>Presenza</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="guest : ${guests}">
+                                                <td th:text="${guest.id}"></td>
+                                                <td th:text="${guest.firstName}"></td>
+                                                <td th:text="${guest.lastName}"></td>
+                                                <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <input type="checkbox" th:field="*{checkedGuests}" th:value="${guest.id}" />
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="submit">Conferma</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,9 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
-import it.uniroma3.CivitasProcuratio.model.Structure;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
-import it.uniroma3.CivitasProcuratio.service.StructureService;
+import it.uniroma3.CivitasProcuratio.service.CasService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import it.uniroma3.CivitasProcuratio.util.GuestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Date;
 public class GuestController {
 
     @Autowired
-    private StructureService structureService;
+    private CasService casService;
 
     @Autowired
     private GuestService guestService;
@@ -32,20 +32,20 @@ public class GuestController {
 
     @RequestMapping(value = "/user/guestList/{id}", method = RequestMethod.GET)
     public String guestList(@PathVariable("id") Long id, Model model) {
-        Structure structure = this.structureService.findOne(id);
+        Cas cas = this.casService.findOne(id);
         Guest guest = new Guest();
-        guest.setStructure(structure);
+        guest.setCas(cas);
         model.addAttribute("guest", guest);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
         return "user/guestList";
     }
 
     @RequestMapping(value = "/admin/guestForm/{id}", method = RequestMethod.GET)
     public String showForm(@PathVariable("id") Long id, Model model) {
         Guest guest = new Guest();
-        Structure structure = structureService.findOne(id);
-        guest.setStructure(structure);
+        Cas cas = casService.findOne(id);
+        guest.setCas(cas);
         model.addAttribute("guest", guest);
         return "admin/guestAdd";
     }
@@ -53,8 +53,8 @@ public class GuestController {
     @RequestMapping(value = "/admin/guestAdd/{id}", method = RequestMethod.POST)
     public String newGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
         this.validator.validate(guest, bindingResult);
-        Structure structure = structureService.findOne(id);
-        guest.setStructure(structure);
+        Cas cas = casService.findOne(id);
+        guest.setCas(cas);
         guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
         if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
@@ -69,8 +69,8 @@ public class GuestController {
                 if (!bindingResult.hasErrors()) {
                     this.guestService.save(guest);
                     model.addAttribute("guest", guest);
-                    model.addAttribute("structure", structure);
-                    model.addAttribute("guests", this.guestService.findByStructure(structure));
+                    model.addAttribute("cas", cas);
+                    model.addAttribute("guests", this.guestService.findByCas(cas));
                     return "admin/guests";
                 }
             }
@@ -81,8 +81,8 @@ public class GuestController {
     @RequestMapping(value = "/admin/updateGuest/{id}", method = RequestMethod.POST)
     public String updateGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
         this.validator.validate(guest, bindingResult);
-        Structure structure = structureService.findOne(this.guestService.findOne(id).getStructure().getId());
-        guest.setStructure(structure);
+        Cas cas = casService.findOne(this.guestService.findOne(id).getCas().getId());
+        guest.setCas(cas);
         guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
         if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
@@ -97,8 +97,8 @@ public class GuestController {
                 if (!bindingResult.hasErrors()) {
                     this.guestService.save(guest);
                     model.addAttribute("guest", guest);
-                    model.addAttribute("structure", structure);
-                    model.addAttribute("guests", this.guestService.findByStructure(structure));
+                    model.addAttribute("cas", cas);
+                    model.addAttribute("guests", this.guestService.findByCas(cas));
                     return "admin/guests";
                 }
             }
@@ -109,30 +109,30 @@ public class GuestController {
     @RequestMapping(value = "/admin/guestDelete/{id}", method = RequestMethod.POST)
     public String deleteGuest(@PathVariable("id") Long id, Model model) {
         Guest guest = this.guestService.findOne(id);
-        Structure structure = this.structureService.findOne(guest.getStructure().getId());
+        Cas cas = this.casService.findOne(guest.getCas().getId());
         this.guestService.deleteById(id);
         model.addAttribute("guest", guest);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
         return "admin/guests";
         //return "redirect:/admin/guests";
     }
 
     @RequestMapping(value = "/admin/adminGuests/{id}", method = RequestMethod.GET)
     public String adminGuests(@PathVariable("id") Long id, Model model) {
-        Structure structure = this.structureService.findOne(id);
+        Cas cas = this.casService.findOne(id);
         Guest guest = new Guest();
-        guest.setStructure(structure);
-        model.addAttribute("guest", guest);
-        model.addAttribute("structure", structure);
-        model.addAttribute("guests", this.guestService.findByStructure(structure));
+        guest.setCas(cas);
+        model.addAttribute("guest", new Guest());
+        model.addAttribute("cas", cas);
+        model.addAttribute("guests", this.guestService.findByCas(cas));
         return "admin/guests";
     }
 
     @RequestMapping("/admin/showUpdateGuest/{id}")
     public String showUpdate(@PathVariable("id") Long idGuest, Model model) {
         Guest guest = this.guestService.findOne(idGuest);
-        model.addAttribute("structure", this.structureService.findOne(guest.getStructure().getId()));
+        model.addAttribute("cas", this.casService.findOne(guest.getCas().getId()));
         model.addAttribute("guest", guest);
         return "admin/updateGuest";
     }

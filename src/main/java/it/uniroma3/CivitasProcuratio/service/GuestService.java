@@ -1,8 +1,8 @@
 package it.uniroma3.CivitasProcuratio.service;
 
 import it.uniroma3.CivitasProcuratio.dao.GuestDAO;
+import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
-import it.uniroma3.CivitasProcuratio.model.Structure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +36,8 @@ public class GuestService {
     }
 
     @Transactional
-    public List<Guest> findByStructure(Structure structure) {
-        return this.guestDAO.findByStructure(structure);
+    public List<Guest> findByCas(Cas cas) {
+        return this.guestDAO.findByCas(cas);
     }
 
     public boolean alreadyExists(Guest guest) {
