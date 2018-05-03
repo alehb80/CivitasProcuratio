@@ -9,4 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface CasDAO extends CrudRepository<Cas, Long> {
 
+    Cas findByNameAndCategoryAndSite(String name, String category, String site);
+
 }

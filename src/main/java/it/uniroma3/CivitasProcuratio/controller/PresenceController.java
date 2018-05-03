@@ -1,6 +1,5 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
-import it.uniroma3.CivitasProcuratio.exception.StorageException;
 import it.uniroma3.CivitasProcuratio.exception.StorageFileNotFoundException;
 import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
@@ -74,8 +73,7 @@ public class PresenceController {
 		model.addAttribute("guests", this.guestService.findByCas(cas));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date myDate = sdf.parse(String.valueOf(presenceDate));
-		List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByCas(cas),
-				myDate);
+		List<Presence> presences = this.presenceService.getPresenceGuestsByDate(this.guestService.findByCas(cas), myDate);
 		model.addAttribute("myDate", myDate);
 		model.addAttribute("presences", presences);
 		model.addAttribute("presenceDate", presenceDate);

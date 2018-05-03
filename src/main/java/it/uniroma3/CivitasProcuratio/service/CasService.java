@@ -34,6 +34,11 @@ public class CasService {
         this.casDAO.delete(id);
     }
 
+    @Transactional
+    public Cas findByNameAndCategoryAndSite(String name, String category, String site) {
+        return this.casDAO.findByNameAndCategoryAndSite(name, category, site);
+    }
+
     public boolean alreadyExists(Cas cas) {
         List<Cas> casList = (List<Cas>) this.casDAO.findAll();
         for (Cas s : casList) {

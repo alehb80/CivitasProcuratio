@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,11 @@ public class GuestService {
     @Transactional
     public void deleteById(Long id) {
         this.guestDAO.delete(id);
+    }
+
+    @Transactional
+    public Guest findByFirstNameAndLastNameAndGenderAndNationality(String firstName, String lastName, String gender, String nationality) {
+        return this.guestDAO.findByFirstNameAndLastNameAndGenderAndNationality(firstName, lastName, gender, nationality);
     }
 
     @Transactional

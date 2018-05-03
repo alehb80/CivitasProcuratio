@@ -52,6 +52,15 @@ public class Cas {
         this.attendanceSheets = attendanceSheets;
     }
 
+    public Cas(String name, String category, String site, String phoneNumber) {
+        this.name = name;
+        this.category = category;
+        this.site = site;
+        this.guests = new ArrayList<>();
+        this.phoneNumber = phoneNumber;
+        this.attendanceSheets = new ArrayList<>();
+    }
+
     public Long getId() {
         return id;
     }

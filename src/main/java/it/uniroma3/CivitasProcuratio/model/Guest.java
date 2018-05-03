@@ -56,17 +56,27 @@ public class Guest {
         this.presences = new ArrayList<>();
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, Integer age, String gender, String nationality, Date checkInDate, Cas cas, List<Presence> presences, Migrant migrant) {
+    public Guest(String firstName, String lastName, Date dateOfBirth, String gender, String nationality, Date checkInDate, Cas cas, List<Presence> presences, Migrant migrant) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
-        this.age = age;
         this.gender = gender;
         this.nationality = nationality;
         this.checkInDate = checkInDate;
         this.cas = cas;
         this.presences = presences;
         this.migrant = migrant;
+    }
+
+    public Guest(String firstName, String lastName, Date dateOfBirth, String gender, String nationality, Date checkInDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.nationality = nationality;
+        this.checkInDate = checkInDate;
+        this.age = DateUtils.ageCalculator(dateOfBirth);
+        this.presences = new ArrayList<>();
     }
 
     public Long getId() {
