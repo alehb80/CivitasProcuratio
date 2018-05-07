@@ -174,4 +174,17 @@ public class Guest {
                 + this.getGender() + " " + this.nationality + " " + this.checkInDate;
     }
 
+    @Override
+    public int hashCode() {
+        return this.firstName.hashCode() + this.lastName.hashCode() + this.age + this.gender.hashCode() + this.nationality.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object guest) {
+        Guest that = (Guest) guest;
+        return (this.getFirstName().equals(that.getFirstName()) && this.getLastName().equals(that.getLastName()) &&
+                this.getDateOfBirth().equals(that.getDateOfBirth()) && this.getGender().equals(that.getGender()) &&
+                this.getNationality().equals(that.getNationality()));
+    }
+
 }

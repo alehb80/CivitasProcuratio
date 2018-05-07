@@ -166,23 +166,17 @@ public class PresenceController {
 			presence.setDate(myDate);
 			presence.setGuest(this.guestService.findOne(id));
 
-			// checking for duplicates presence
-			List<Presence> ps = this.presenceService.findByGuest(this.guestService.findOne(id));
-			boolean duplicate = false;
-			for (Presence p : ps) {
-				if (p.getDate().equals(myDate)) {
-					duplicate = true;
-					break;
+			if(this.presenceService.alreadyExists(presence)) {
+				model.addAttribute("message", "*ATTENZIONE: esiste già una presenza per la data selezionata!");
+				return "admin/dailyPresence";
+			}
+			else {
+				if (!bindingResult.hasErrors()) {
+					this.presenceService.save(presence);
+					return "admin/dailyPresence";
 				}
 			}
-			if (duplicate) {
-				continue;
-			}
-
-			// if no duplicate
-			this.presenceService.save(presence);
 		}
-
 		return "admin/dailyPresence";
 	}
 

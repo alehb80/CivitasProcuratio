@@ -74,9 +74,9 @@ public class PresenceService {
         return presences;
     }
 
-    public boolean alreadyExists(Presence presence, Date date) {
-        for (Presence p: this.presenceDAO.findByDate(date)) {
-            if (p.getDate().equals(presence.getDate()))
+    public boolean alreadyExists(Presence presence) {
+        for (Presence p: this.presenceDAO.findByDate(presence.getDate())) {
+            if (p.getDate().equals(presence.getDate()) && p.getGuest().equals(presence.getGuest()))
                 return true;
         }
         return false;
