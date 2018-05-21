@@ -8,5 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface MigrantDAO extends CrudRepository<Migrant, Long> {
-
 }

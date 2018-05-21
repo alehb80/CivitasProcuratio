@@ -869,6 +869,10 @@ h2.title {
     background-color: #4CAF50;
 }
 
+#para4 {
+    background-color: #FF4E50;
+}
+
 .sidebar:before,
 .off-canvas-sidebar:before {
     opacity: .33;

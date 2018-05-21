@@ -4,6 +4,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -12,15 +13,19 @@ import java.util.List;
 public class Migrant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
 
-    @Column(nullable = false, name="firstName")
-    private String firstName;
+    @Column(nullable = false, name="fullName")
+    private String fullName;
 
-    @Column(nullable = false, name="lastName")
-    private String lastName;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name="checkInDate")
+    private Date checkInDate;
+
+    @Column(nullable = false, name="assigned")
+    private boolean assigned;
 
     @OneToMany(mappedBy = "migrant")
     private List<Guest> guests;
@@ -29,9 +34,10 @@ public class Migrant {
         this.guests = new ArrayList<>();
     }
 
-    public Migrant(String firstName, String lastName, List<Guest> guests) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Migrant(String fullName, Date checkInDate, boolean assigned, List<Guest> guests) {
+        this.fullName = fullName;
+        this.checkInDate = checkInDate;
+        this.assigned = assigned;
         this.guests = guests;
     }
 
@@ -43,20 +49,28 @@ public class Migrant {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Date getCheckInDate() {
+        return checkInDate;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
     }
 
     public List<Guest> getGuests() {

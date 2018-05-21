@@ -42,6 +42,11 @@ public class DataLoader implements ApplicationRunner {
             User user = new User("user", "user@user.it", "$2a$10$2eM9gsjg3PzuUuy.o.Cg3O6.N2zITz2rTynkQtldss.k.iFtyDUnW", "ROLE_USER");
             this.userDAO.save(user);
         }
+        // Username = "arrivalsManager", Password = "arrivalsManager"
+        if(this.userDAO.findByUsername("arrivalsManager") == null) {
+            User user = new User("arrivalsManager", "arrivalsManager@arrivalsManager.it", "$2a$10$fBXbURtq/RTHt5M1zlBBxeJaXMFSt0vAlHubqyCVbLlcphMuOTe6q", "ROLE_ARRIVALS_MANAGER");
+            this.userDAO.save(user);
+        }
         // Nome = "CAS Anzio Portofino", Categoria = "RTI Tre Fontane/Senis Hospes", Ubicazione = "Anzio", Numero Telefonico = "06-9898813"
         if (this.casDAO.findByNameAndCategoryAndSite("CAS Anzio Portofino", "RTI Tre Fontane/Senis Hospes", "Anzio") == null) {
             Cas cas = new Cas("CAS Anzio Portofino", "RTI Tre Fontane/Senis Hospes", "Anzio", "06-9898813");

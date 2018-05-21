@@ -41,6 +41,9 @@ public class LoginController {
         } else if (role.contains("ROLE_USER")) {
             session.setAttribute("user", user);
             targetUrl = "/user/homeUser";
+        } else if (role.contains("ROLE_ARRIVALS_MANAGER")) {
+            session.setAttribute("user", user);
+            targetUrl = "/arrivalsManager/homeArrivalsManager";
         }
         return targetUrl;
     }
