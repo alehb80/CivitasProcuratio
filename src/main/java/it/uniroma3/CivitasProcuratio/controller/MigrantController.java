@@ -1,6 +1,11 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
+import it.uniroma3.CivitasProcuratio.model.Cas;
+import it.uniroma3.CivitasProcuratio.model.Guest;
 import it.uniroma3.CivitasProcuratio.model.Migrant;
+import it.uniroma3.CivitasProcuratio.model.MigrantAssignmentForm;
+import it.uniroma3.CivitasProcuratio.service.CasService;
+import it.uniroma3.CivitasProcuratio.service.GuestService;
 import it.uniroma3.CivitasProcuratio.service.MigrantService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import it.uniroma3.CivitasProcuratio.util.MigrantValidator;
@@ -15,12 +20,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MigrantController {
 
     @Autowired
     private MigrantService migrantService;
+
+    @Autowired
+    private CasService casService;
+
+    @Autowired
+    private GuestService guestService;
 
     @Autowired
     private MigrantValidator validator;
@@ -70,7 +82,35 @@ public class MigrantController {
 
     @RequestMapping("/superadmin/migrants")
     public String migrants(Model model) {
+        model.addAttribute("casList", this.casService.findAll());
         model.addAttribute("migrantsList", this.migrantService.findAll());
+        model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
+        return "superadmin/migrants";
+    }
+
+    @RequestMapping(value = "/superadmin/migrants", method = RequestMethod.POST)
+    public String migrantsDone(@ModelAttribute("migrantAssignmentForm") MigrantAssignmentForm form,
+                               Model model) {
+
+        Long casId = form.getCheckedCAS();
+
+        for (Long migrantId : form.getCheckedMigrants()) {
+            Migrant migrant = this.migrantService.findOne(migrantId);
+            migrant.setAssigned(true);
+
+            Guest guest = new Guest();
+            guest.setMigrant(this.migrantService.findOne(migrantId));
+            guest.setCas(this.casService.findOne(casId));
+
+            this.migrantService.save(migrant);
+            this.guestService.save(guest);
+
+            model.addAttribute("casList", this.casService.findAll());
+            model.addAttribute("migrantsList", this.migrantService.findAll());
+            model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
+        }
+
+
         return "superadmin/migrants";
     }
 
