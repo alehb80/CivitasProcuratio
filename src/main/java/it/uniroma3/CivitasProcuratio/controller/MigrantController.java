@@ -82,7 +82,7 @@ public class MigrantController {
 
     @RequestMapping("/arrivalsManager/migrantsList")
     public String migrantsList(Model model) {
-        model.addAttribute("migrantsList", this.migrantService.findAll());
+        model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
         return "arrivalsManager/migrantsList";
     }
 
