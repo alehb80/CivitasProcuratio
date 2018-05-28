@@ -35,6 +35,13 @@ public class Migrant {
     @JoinColumn(name = "personal_register_id")
     private PersonalRegister personalRegister;
 
+    @ManyToOne
+    @JoinColumn(name = "family_unit_id")
+    private FamilyUnit familyUnit;
+
+    @OneToOne(mappedBy = "familyHead")
+    private FamilyUnit familyOwn;
+
     public Migrant() {
         this.guests = new ArrayList<>();
     }
@@ -99,4 +106,19 @@ public class Migrant {
         this.personalRegister = personalRegister;
     }
 
+    public FamilyUnit getFamilyUnit() {
+        return familyUnit;
+    }
+
+    public void setFamilyUnit(FamilyUnit familyUnit) {
+        this.familyUnit = familyUnit;
+    }
+
+    public FamilyUnit getFamilyOwn() {
+        return familyOwn;
+    }
+
+    public void setFamilyOwn(FamilyUnit familyOwn) {
+        this.familyOwn = familyOwn;
+    }
 }
