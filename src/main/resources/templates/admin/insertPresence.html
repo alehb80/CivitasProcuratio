@@ -121,7 +121,7 @@
 														th:text="${#dates.format(guest.migrant.personalRegister.dateOfBirth, 'dd-MM-yyyy')}"></td>
 													<td>
 														<input type="checkbox" th:field="*{checkedGuests}"
-														th:value="${migrant.id}" th:class="chkCheckBox"/>
+														th:value="${guest.id}" th:class="chkCheckBox"/>
 													</td>
 
 												</tr>
