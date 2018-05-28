@@ -24,6 +24,18 @@
 <link
 	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
 	rel='stylesheet' type='text/css' />
+<script src="/js/jquery-3.2.1.min.js" type="text/javascript" />
+
+<script type = "text/javascript">
+    $(document).ready(function(){
+        $('#checkAll').click(function(){
+            if ($(this).is(":checked"))
+                $('.chkCheckBox').prop('checked', true);
+            else
+                $('.chkCheckBox').prop('checked', false);
+        });
+    });
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -98,17 +110,19 @@
 												<th>Nome</th>
 												<th>Cognome</th>
 												<th>Data Di Nascita</th>
-												<th>Presenza</th>
+												<th><input type="checkbox" th:id="checkAll"/> Presenza</th>
 											</thead>
 											<tbody>
 												<tr th:each="guest : ${guests}">
 													<td th:text="${guest.id}"></td>
-													<td th:text="${guest.firstName}"></td>
-													<td th:text="${guest.lastName}"></td>
+													<td th:text="${guest.migrant.personalRegister.firstName}"></td>
+													<td th:text="${guest.migrant.personalRegister.lastName}"></td>
 													<td
-														th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
-													<td><input type="checkbox" th:field="*{checkedGuests}"
-														th:value="${guest.id}" /></td>
+														th:text="${#dates.format(guest.migrant.personalRegister.dateOfBirth, 'dd-MM-yyyy')}"></td>
+													<td>
+														<input type="checkbox" th:field="*{checkedGuests}"
+														th:value="${guest.id}" th:class="chkCheckBox"/>
+													</td>
 
 												</tr>
 											</tbody>
@@ -125,7 +139,6 @@
 	</div>
 
 	<!--   Core JS Files   -->
-	<script src="/js/jquery-3.2.1.min.js" type="text/javascript" />
 	<script src="/js/bootstrap.min.js" type="text/javascript" />
 	<script src="/js/material.min.js" type="text/javascript" />
 	<!--  Charts Plugin -->

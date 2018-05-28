@@ -99,8 +99,8 @@
 										<tbody>
 											<tr th:each="presence : ${presences}">
 												<td th:text="${presence.guest.id}"></td>
-												<!--<td th:text="${presence.guest.firstName}"></td>
-												<td th:text="${presence.guest.lastName}"></td>-->
+												<td th:text="${presence.guest.migrant.personalRegister.firstName}"></td>
+												<td th:text="${presence.guest.migrant.personalRegister.lastName}"></td>
 											</tr>
 										</tbody>
 									</table>

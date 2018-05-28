@@ -7,9 +7,7 @@ public class PresenceForm {
 
     private List<Long> checkedGuests;
 
-    public PresenceForm() {
-        this.checkedGuests = new ArrayList<>();
-    }
+    public PresenceForm() { }
 
     public List<Long> getCheckedGuests() {
         return checkedGuests;

@@ -134,6 +134,8 @@ public class PresenceController {
 
 		for (Guest g : guests) {
 			ids.add(g.getId());
+
+			System.out.println(g.getId());
 		}
 
 		model.addAttribute("myDate", myDate);
@@ -162,18 +164,19 @@ public class PresenceController {
 		List<Long> checkedIds = presenceForm.getCheckedGuests();
 
 		for (Long id : checkedIds) {
+			System.out.println("ID: " + id);
 			presence = new Presence();
 			presence.setDate(myDate);
 			presence.setGuest(this.guestService.findOne(id));
 
+			//this.presenceService.save(presence);
+
 			if(this.presenceService.alreadyExists(presence)) {
 				model.addAttribute("message", "*ATTENZIONE: esiste già una presenza per la data selezionata!");
-				return "admin/dailyPresence";
 			}
 			else {
 				if (!bindingResult.hasErrors()) {
 					this.presenceService.save(presence);
-					return "admin/dailyPresence";
 				}
 			}
 		}
