@@ -56,7 +56,7 @@ public class PresenceController {
 	@Autowired
 	private StorageService storageService;
 
-	@RequestMapping(value = "/admin/insertDate/{id}", method = RequestMethod.GET)
+	@RequestMapping("/admin/insertDate/{id}")
 	public String showFormDate(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("presenceDate", new Date());
 		model.addAttribute("cas", this.casService.findOne(id));
@@ -65,7 +65,7 @@ public class PresenceController {
 		return "admin/insertDate";
 	}
 
-	@RequestMapping(value = "/admin/dailyPresence/{id}", method = RequestMethod.GET)
+	@RequestMapping("/admin/dailyPresence/{id}")
 	public String showReport(@PathVariable("id") Long id, Model model,
 			@ModelAttribute("presenceDate") String presenceDate) throws ParseException {
 		Cas cas = casService.findOne(id);
@@ -122,7 +122,7 @@ public class PresenceController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@RequestMapping(value = "/admin/showInsertPresence/{id}/{presenceDate}", method = RequestMethod.GET)
+	@RequestMapping("/admin/showInsertPresence/{id}/{presenceDate}")
 	public String showFormPresence(@PathVariable("id") Long id, Model model,
 			@PathVariable("presenceDate") String presenceDate) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -134,8 +134,6 @@ public class PresenceController {
 
 		for (Guest g : guests) {
 			ids.add(g.getId());
-
-			System.out.println(g.getId());
 		}
 
 		model.addAttribute("myDate", myDate);
@@ -164,12 +162,9 @@ public class PresenceController {
 		List<Long> checkedIds = presenceForm.getCheckedGuests();
 
 		for (Long id : checkedIds) {
-			System.out.println("ID: " + id);
 			presence = new Presence();
 			presence.setDate(myDate);
 			presence.setGuest(this.guestService.findOne(id));
-
-			//this.presenceService.save(presence);
 
 			if(this.presenceService.alreadyExists(presence)) {
 				model.addAttribute("message", "*ATTENZIONE: esiste già una presenza per la data selezionata!");
@@ -180,7 +175,7 @@ public class PresenceController {
 				}
 			}
 		}
-		return "admin/dailyPresence";
+		return "admin/insertDate";
 	}
 
 	@RequestMapping(value = "/admin/periodPresence/{id}", method = RequestMethod.POST)

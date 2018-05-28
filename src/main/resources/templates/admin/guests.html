@@ -108,7 +108,11 @@
                                                 <td th:text="${#dates.format(guest.migrant.personalRegister.dateOfBirth, 'dd-MM-yyyy')}"></td>
                                                 <td th:text="${guest.migrant.personalRegister.gender}"></td>
                                                 <td th:text="${guest.migrant.personalRegister.nationality}"></td>
-                                                <td th:text="${#dates.format(guest.checkInDate, 'dd-MM-yyyy')}"></td>
+                                                <td th:if="${guest.checkInDate}"
+                                                    th:text="${#dates.format(guest.checkInDate, 'dd-MM-yyyy')}">
+                                                </td>
+
+                                                <td th:unless="${guest.checkInDate}">In attesa</td>
                                                 <td>
                                                     <div>
                                                         <a th:href="@{'/admin/showUpdateGuest'  + '/' + ${guest.id}}">Modifica</a>

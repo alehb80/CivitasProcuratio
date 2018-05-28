@@ -13,7 +13,7 @@ import java.util.List;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Long id;
 
@@ -32,6 +32,9 @@ public class Guest {
     @JoinColumn(name = "migrant_id")
     private Migrant migrant;
 
+    /*@Column
+    private boolean arrived;*/
+
     public Guest() {
         this.presences = new ArrayList<>();
     }
@@ -41,6 +44,7 @@ public class Guest {
         this.cas = cas;
         this.presences = presences;
         this.migrant = migrant;
+        //this.arrived = false;
     }
 
     public Guest(Date dateOfBirth, Date checkInDate) {
@@ -87,6 +91,14 @@ public class Guest {
     public void setMigrant(Migrant migrant) {
         this.migrant = migrant;
     }
+
+    /*public boolean isArrived() {
+        return arrived;
+    }
+
+    public void setArrived(boolean arrived) {
+        this.arrived = arrived;
+    }*/
 
     /*@Override
     public int hashCode() {

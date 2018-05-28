@@ -80,11 +80,29 @@
                                 <p th:text="${message}"></p>
                             </div>
                             <div class="card-content">
-                                <form th:action="@{/arrivalsManager/addMigrant}" method="POST" th:object="${migrant}">
+                                <form th:action="@{/arrivalsManager/addMigrant}" method="POST" th:object="${personalRegister}">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Nome Completo</label>
+                                                <label class="control-label">Nome</label>
+                                                <input type="text" placeholder="Nome" name="firstName" th:field="*{firstName}" required="required"/>
+                                                <span th:if="${#fields.hasErrors('firstName')}">Errore: campo obbligatorio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cognome</label>
+                                                <input type="text" placeholder="Cognome" name="lastName" th:field="*{lastName}" required="required"/>
+                                                <span th:if="${#fields.hasErrors('lastName')}">Errore: campo obbligatorio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nome completo</label>
                                                 <input type="text" placeholder="Nome Completo" name="fullName" th:field="*{fullName}" required="required"/>
                                                 <span th:if="${#fields.hasErrors('fullName')}">Errore: campo obbligatorio</span>
                                             </div>
@@ -93,9 +111,31 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Data Di Arrivo</label>
-                                                <input id="checkInDate" name="checkInDate" type="date" th:field="*{checkInDate}" required="required" title="checkInDate"/>
-                                                <span th:if="${#fields.hasErrors('checkInDate')}">Errore: campo obbligatorio</span>
+                                                <label class="control-label">Sesso</label>
+                                                <select id="gender" name="gender" th:field="*{gender}" required="required" title="gender">
+                                                    <option value="">&lt;seleziona&gt;</option>
+                                                    <option value="M">Uomo</option>
+                                                    <option value="F">Donna</option>
+                                                </select>
+                                                <span th:if="${#fields.hasErrors('gender')}">Errore: campo obbligatorio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Data Di Nascita</label>
+                                                <input id="dateOfBirth" name="dateOfBirth" type="date" th:field="*{dateOfBirth}" required="required" title="dateOfBirth"/>
+                                                <span th:if="${#fields.hasErrors('dateOfBirth')}">Errore: campo obbligatorio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nationalità</label>
+                                                <input type="text" placeholder="Nationalità" name="nationality" th:field="*{nationality}" required="required"/>
+                                                <span th:if="${#fields.hasErrors('nationality')}">Errore: campo obbligatorio</span>
                                             </div>
                                         </div>
                                     </div>

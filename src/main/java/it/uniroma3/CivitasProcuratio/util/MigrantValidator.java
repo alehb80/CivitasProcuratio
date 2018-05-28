@@ -17,7 +17,6 @@ public class MigrantValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fullName", "Non deve essere vuoto");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "checkInDate", "Non deve essere vuoto");
     }
 
 }

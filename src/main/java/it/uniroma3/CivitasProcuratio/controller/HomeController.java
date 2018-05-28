@@ -11,7 +11,6 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index"})
     public String hello() {
-        System.out.print(Calendar.getInstance().getTime());
         return "index";
     }
 

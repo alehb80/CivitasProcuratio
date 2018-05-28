@@ -13,7 +13,7 @@ import java.util.List;
 public class AttendanceSheet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Long id;
 
