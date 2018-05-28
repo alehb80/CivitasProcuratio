@@ -25,6 +25,11 @@ public class MigrantService {
     }
 
     @Transactional
+    public List<Migrant> findAllByAssigned(boolean assigned) {
+        return this.migrantDAO.findAllByAssigned(assigned);
+    }
+
+    @Transactional
     public Migrant findOne(Long id) {
         return this.migrantDAO.findOne(id);
     }
@@ -41,11 +46,6 @@ public class MigrantService {
                 return true;
         }
         return false;
-    }
-
-    @Transactional
-    public List<Migrant> findAllByAssigned(boolean assigned) {
-        return this.migrantDAO.findAllByAssigned(assigned);
     }
 
 }

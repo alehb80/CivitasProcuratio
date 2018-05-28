@@ -226,6 +226,31 @@ public class DataLoader implements ApplicationRunner {
                 guest.setMigrant(migrant);
                 this.guestDAO.save(guest);
             }
+
+            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Mama", "Diop", "M", "Senegal") == null) {
+                String myDate1 = "1990-02-20";
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+                PersonalRegister personalRegister = new PersonalRegister("Mama", "Diop", "Mama Diop", dateOfBirth, "M", "Senegal");
+                this.personalRegisterDAO.save(personalRegister);
+                Migrant migrant = new Migrant();
+                migrant.setFullName("Mama Diop");
+                migrant.setPersonalRegister(personalRegister);
+                String myDate3 = "2018-05-29";
+                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+                migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
+                this.migrantDAO.save(migrant);
+
+                Guest guest = new Guest();
+                String myDate2 = "2018-03-18";
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
+                guest.setCheckInDate(checkInDate);
+                guest.setCas(cas);
+                this.guestDAO.save(guest);
+            }
         }
         // Nome = "Parrocchia S.Leone I", Categoria = "Caritas", Ubicazione = "Roma", Numero Telefonico = "06-5298986"
         if (this.casDAO.findByNameAndCategoryAndSite("Parrocchia S.Leone I", "Caritas", "Roma") == null) {
@@ -299,7 +324,7 @@ public class DataLoader implements ApplicationRunner {
                 Migrant migrant = new Migrant();
                 migrant.setFullName("Anice Badri");
                 migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-03-12";
+                String myDate3 = "2018-05-28";
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);

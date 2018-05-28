@@ -31,9 +31,6 @@ public class Migrant {
     @OneToMany(mappedBy = "migrant", cascade = CascadeType.ALL)
     private List<Guest> guests;
 
-    //@OneToOne(cascade = CascadeType.REMOVE)
-    //private Guest currentGuest;
-
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "personal_register_id")
     private PersonalRegister personalRegister;
@@ -46,6 +43,7 @@ public class Migrant {
     private FamilyUnit familyOwn;
 
     public Migrant() {
+        this.assigned = false;
         this.guests = new ArrayList<>();
     }
 
@@ -131,4 +129,5 @@ public class Migrant {
                 return guests.get(0);
         return null;
     }
+
 }

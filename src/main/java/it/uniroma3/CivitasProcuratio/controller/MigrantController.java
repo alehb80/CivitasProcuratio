@@ -122,8 +122,6 @@ public class MigrantController {
             model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
             model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
         }
-
-
         return "superadmin/migrants";
     }
 
