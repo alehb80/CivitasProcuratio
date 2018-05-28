@@ -73,6 +73,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -98,6 +99,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -123,6 +125,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -159,6 +162,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -184,6 +188,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -209,6 +214,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -245,6 +251,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -270,6 +277,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -295,6 +303,7 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
+                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
 
                 Guest guest = new Guest();
@@ -303,7 +312,6 @@ public class DataLoader implements ApplicationRunner {
                 Date checkInDate = sdf2.parse(String.valueOf(myDate2));
                 guest.setCheckInDate(checkInDate);
                 guest.setCas(cas);
-                guest.setMigrant(migrant);
                 this.guestDAO.save(guest);
             }
         }

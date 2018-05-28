@@ -43,4 +43,9 @@ public class MigrantService {
         return false;
     }
 
+    @Transactional
+    public List<Migrant> findAllByAssigned(boolean assigned) {
+        return this.migrantDAO.findAllByAssigned(assigned);
+    }
+
 }

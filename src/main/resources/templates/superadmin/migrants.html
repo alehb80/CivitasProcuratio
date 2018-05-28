@@ -107,6 +107,7 @@
                                             <th>Nome Completo</th>
                                             <th>Data Di Arrivo</th>
                                             <th>Assegnato</th>
+                                            <th>Arrivo Al Cas</th>
                                             <th><input type="checkbox" th:id="checkAll"/></th>
                                         </thead>
                                         <tbody>
@@ -114,6 +115,10 @@
                                                 <td th:text="${migrant.personalRegister.fullName}"></td>
                                                 <td th:text="${#dates.format(migrant.checkInDate, 'dd-MM-yyyy')}"></td>
                                                 <td th:text="${migrant.isAssigned()}"></td>
+                                                <td th:if="${migrant.currentGuest()}" th:text="${migrant.currentGuest().checkInDate}"></td>
+                                                <td th:unless="${migrant.currentGuest()}">Null</td>
+
+
                                                 <td>
                                                     <input type="checkbox" th:field="*{checkedMigrants}"
                                                            th:value="${migrant.id}" th:class="chkCheckBox"/>

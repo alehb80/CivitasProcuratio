@@ -31,6 +31,9 @@ public class Migrant {
     @OneToMany(mappedBy = "migrant", cascade = CascadeType.ALL)
     private List<Guest> guests;
 
+    //@OneToOne(cascade = CascadeType.REMOVE)
+    //private Guest currentGuest;
+
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "personal_register_id")
     private PersonalRegister personalRegister;
@@ -120,5 +123,12 @@ public class Migrant {
 
     public void setFamilyOwn(FamilyUnit familyOwn) {
         this.familyOwn = familyOwn;
+    }
+
+    public Guest currentGuest() {
+        if(guests != null)
+            if(guests.size() >= 1)
+                return guests.get(0);
+        return null;
     }
 }

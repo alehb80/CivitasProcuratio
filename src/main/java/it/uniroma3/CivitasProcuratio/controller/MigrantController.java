@@ -96,7 +96,7 @@ public class MigrantController {
     @RequestMapping("/superadmin/migrants")
     public String migrants(Model model) {
         model.addAttribute("casList", this.casService.findAll());
-        model.addAttribute("migrantsList", this.migrantService.findAll());
+        model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
         model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
         return "superadmin/migrants";
     }
@@ -119,7 +119,7 @@ public class MigrantController {
             this.guestService.save(guest);
 
             model.addAttribute("casList", this.casService.findAll());
-            model.addAttribute("migrantsList", this.migrantService.findAll());
+            model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
             model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
         }
 
