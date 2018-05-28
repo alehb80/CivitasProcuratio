@@ -13,8 +13,6 @@ import java.util.List;
 @Repository
 public interface GuestDAO extends CrudRepository<Guest, Long> {
 
-    Guest findByFirstNameAndLastNameAndGenderAndNationality(String firstName, String lastName, String gender, String nationality);
-
     List<Guest> findByCas(Cas cas);
 
 }

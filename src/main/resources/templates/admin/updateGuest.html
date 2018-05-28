@@ -92,7 +92,7 @@
                                     <p th:text="${message}"></p>
                                 </div>
                                 <div class="card-content">
-                                    <form th:action="@{'/admin/updateGuest' + '/' + ${guest.id}}" method="POST" th:object="${guest}">
+                                    <form th:action="@{'/admin/updateGuest' + '/' + ${guest.id}}" method="POST" th:object="${guest.migrant.personalRegister}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group label-floating">

@@ -37,7 +37,7 @@ public class MigrantService {
     public boolean alreadyExists(Migrant migrant) {
         List<Migrant> migrants = (List<Migrant>) this.migrantDAO.findAll();
         for (Migrant m : migrants) {
-            if (m.getFullName().equals(migrant.getFullName()))
+            if (m.getPersonalRegister().getFullName().equals(migrant.getPersonalRegister().getFullName()))
                 return true;
         }
         return false;

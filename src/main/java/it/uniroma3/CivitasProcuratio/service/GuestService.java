@@ -37,11 +37,6 @@ public class GuestService {
     }
 
     @Transactional
-    public Guest findByFirstNameAndLastNameAndGenderAndNationality(String firstName, String lastName, String gender, String nationality) {
-        return this.guestDAO.findByFirstNameAndLastNameAndGenderAndNationality(firstName, lastName, gender, nationality);
-    }
-
-    @Transactional
     public List<Guest> findByCas(Cas cas) {
         return this.guestDAO.findByCas(cas);
     }
@@ -49,9 +44,11 @@ public class GuestService {
     public boolean alreadyExists(Guest guest) {
         List<Guest> guests = (List<Guest>) this.guestDAO.findAll();
         for (Guest g : guests) {
-            if (g.getFirstName().equals(guest.getFirstName()) && g.getLastName().equals(guest.getLastName()) &&
-                    g.getDateOfBirth().compareTo(guest.getDateOfBirth()) == 0 &&
-                    g.getGender().equals(guest.getGender()) && g.getNationality().equals(guest.getNationality()))
+            if (g.getMigrant().getPersonalRegister().getFirstName().equals(guest.getMigrant().getPersonalRegister().getFirstName()) &&
+                    g.getMigrant().getPersonalRegister().getLastName().equals(guest.getMigrant().getPersonalRegister().getLastName()) &&
+                    g.getMigrant().getPersonalRegister().getDateOfBirth().compareTo(guest.getMigrant().getPersonalRegister().getDateOfBirth()) == 0 &&
+                    g.getMigrant().getPersonalRegister().getGender().equals(guest.getMigrant().getPersonalRegister().getGender()) &&
+                    g.getMigrant().getPersonalRegister().getNationality().equals(guest.getMigrant().getPersonalRegister().getNationality()))
                 return true;
         }
         return false;

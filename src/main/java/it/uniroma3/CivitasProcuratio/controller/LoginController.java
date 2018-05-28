@@ -25,7 +25,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value="/role", method = RequestMethod.GET)
+    @RequestMapping("/role")
     public String loginRole(HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
@@ -48,7 +48,7 @@ public class LoginController {
         return targetUrl;
     }
 
-    @RequestMapping(value="/403", method = RequestMethod.GET)
+    @RequestMapping("/403")
     public String error403() {
         return "403";
     }

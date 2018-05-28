@@ -31,7 +31,7 @@ public class RegistrationController {
     private UserValidator validator;
 
 
-    @RequestMapping(value = "/superadmin/adminForm/{id}", method = RequestMethod.GET)
+    @RequestMapping("/superadmin/adminForm/{id}")
     public String showForm(@PathVariable("id") Long id, Model model) {
         Cas cas = this.casService.findOne(id);
         if (cas.getUser() != null) {

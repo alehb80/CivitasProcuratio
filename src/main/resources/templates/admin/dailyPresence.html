@@ -99,21 +99,18 @@
 										<tbody>
 											<tr th:each="presence : ${presences}">
 												<td th:text="${presence.guest.id}"></td>
-												<td th:text="${presence.guest.firstName}"></td>
-												<td th:text="${presence.guest.lastName}"></td>
+												<!--<td th:text="${presence.guest.firstName}"></td>
+												<td th:text="${presence.guest.lastName}"></td>-->
 											</tr>
 										</tbody>
 									</table>
 									<div>
-										<a
-											th:href="@{'/admin/showInsertPresence' + '/' + ${cas.id} + '/' + ${presenceDate}}">Aggiorna
-											Presenze</a>
+										<a th:href="@{'/admin/showInsertPresence' + '/' + ${cas.id} + '/' + ${presenceDate}}">Aggiorna Presenze</a>
 									</div>
 									<br /> <br />
 									<div th:if="${uploaderMessage}">
 										<h4 th:text="${uploaderMessage}" />
 									</div>
-
 									<div>
 										<form method="POST" enctype="multipart/form-data"
 											action="/admin/uploadFoglioFirme">

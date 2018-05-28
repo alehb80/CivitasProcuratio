@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name="migranti")
@@ -17,7 +18,7 @@ public class Migrant {
     @Column(name="id")
     private Long id;
 
-    @Column(nullable = false, name="fullName")
+    @Column(name="fullName")
     private String fullName;
 
     @Temporal(TemporalType.DATE)
@@ -27,15 +28,18 @@ public class Migrant {
     @Column(nullable = false, name="assigned")
     private boolean assigned;
 
-    @OneToMany(mappedBy = "migrant")
+    @OneToMany(mappedBy = "migrant", cascade = CascadeType.ALL)
     private List<Guest> guests;
+
+    @OneToOne
+    @JoinColumn(name = "personal_register_id")
+    private PersonalRegister personalRegister;
 
     public Migrant() {
         this.guests = new ArrayList<>();
     }
 
-    public Migrant(String fullName, Date checkInDate, boolean assigned, List<Guest> guests) {
-        this.fullName = fullName;
+    public Migrant(Date checkInDate, boolean assigned, List<Guest> guests) {
         this.checkInDate = checkInDate;
         this.assigned = assigned;
         this.guests = guests;
@@ -79,6 +83,18 @@ public class Migrant {
 
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
+    }
+
+    /*public Optional getOptionalPersonalRegister() {
+        return Optional.ofNullable(personalRegister);
+    }*/
+
+    public PersonalRegister getPersonalRegister() {
+        return personalRegister;
+    }
+
+    public void setPersonalRegister(PersonalRegister personalRegister) {
+        this.personalRegister = personalRegister;
     }
 
 }

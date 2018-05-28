@@ -87,7 +87,7 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="migrant : ${migrantsList}">
-                                        <td th:text="${migrant.fullName}"></td>
+                                        <td th:text="${migrant.personalRegister.fullName}"></td>
                                         <td th:text="${#dates.format(migrant.checkInDate, 'dd-MM-yyyy')}"></td>
                                         <td th:text="${migrant.isAssigned()}"></td>
                                         <td>

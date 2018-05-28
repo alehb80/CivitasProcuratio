@@ -2,10 +2,12 @@ package it.uniroma3.CivitasProcuratio.controller;
 
 import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
+import it.uniroma3.CivitasProcuratio.model.Migrant;
+import it.uniroma3.CivitasProcuratio.model.PersonalRegister;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
 import it.uniroma3.CivitasProcuratio.service.CasService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
-import it.uniroma3.CivitasProcuratio.util.GuestValidator;
+import it.uniroma3.CivitasProcuratio.util.PersonalRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -28,9 +30,9 @@ public class GuestController {
     private GuestService guestService;
 
     @Autowired
-    private GuestValidator validator;
+    private PersonalRegisterValidator validator;
 
-    @RequestMapping(value = "/user/guestList/{id}", method = RequestMethod.GET)
+    @RequestMapping("/user/guestList/{id}")
     public String guestList(@PathVariable("id") Long id, Model model) {
         Cas cas = this.casService.findOne(id);
         Guest guest = new Guest();
@@ -41,22 +43,26 @@ public class GuestController {
         return "user/guestList";
     }
 
-    @RequestMapping(value = "/admin/guestForm/{id}", method = RequestMethod.GET)
+    @RequestMapping("/admin/guestForm/{id}")
     public String showForm(@PathVariable("id") Long id, Model model) {
         Guest guest = new Guest();
+        guest.setMigrant(new Migrant());
         Cas cas = casService.findOne(id);
         guest.setCas(cas);
+        PersonalRegister personalRegister = new PersonalRegister();
+        guest.getMigrant().setPersonalRegister(personalRegister);
+        model.addAttribute("personalRegister", personalRegister);
         model.addAttribute("guest", guest);
         return "admin/guestAdd";
     }
 
     @RequestMapping(value = "/admin/guestAdd/{id}", method = RequestMethod.POST)
     public String newGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
-        this.validator.validate(guest, bindingResult);
+        this.validator.validate(guest.getMigrant().getPersonalRegister(), bindingResult);
         Cas cas = casService.findOne(id);
         guest.setCas(cas);
-        guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
-        if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
+        guest.getMigrant().getPersonalRegister().setAge(DateUtils.ageCalculator(guest.getMigrant().getPersonalRegister().getDateOfBirth()));
+        if (!DateUtils.dateValidation(guest.getMigrant().getPersonalRegister().getDateOfBirth())) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "admin/guestAdd";
         }
@@ -67,6 +73,7 @@ public class GuestController {
             }
             else {
                 if (!bindingResult.hasErrors()) {
+
                     this.guestService.save(guest);
                     model.addAttribute("guest", guest);
                     model.addAttribute("cas", cas);
@@ -80,11 +87,11 @@ public class GuestController {
 
     @RequestMapping(value = "/admin/updateGuest/{id}", method = RequestMethod.POST)
     public String updateGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
-        this.validator.validate(guest, bindingResult);
+        this.validator.validate(guest.getMigrant().getPersonalRegister(), bindingResult);
         Cas cas = casService.findOne(this.guestService.findOne(id).getCas().getId());
         guest.setCas(cas);
-        guest.setAge(DateUtils.ageCalculator(guest.getDateOfBirth()));
-        if (!DateUtils.dateValidation(guest.getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
+        guest.getMigrant().getPersonalRegister().setAge(DateUtils.ageCalculator(guest.getMigrant().getPersonalRegister().getDateOfBirth()));
+        if (!DateUtils.dateValidation(guest.getMigrant().getPersonalRegister().getDateOfBirth()) || !DateUtils.dateValidation((guest.getCheckInDate()))) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "admin/updateGuest";
         }

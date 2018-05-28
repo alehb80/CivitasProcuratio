@@ -1,6 +1,5 @@
 package it.uniroma3.CivitasProcuratio.model;
 
-import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -14,31 +13,12 @@ import java.util.List;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
 
-    @Column(nullable = false, name="firstName")
-    private String firstName;
-
-    @Column(nullable = false, name="lastName")
-    private String lastName;
-
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false, name="dateOfBirth")
-    private Date dateOfBirth;
-
-    @Column(nullable = false, name="age")
-    private Integer age;
-
-    @Column(nullable = false, name="gender")
-    private String gender;
-
-    @Column(nullable = false, name="nationality")
-    private String nationality;
-
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false, name="checkInDate")
+    @Column(name="checkInDate")
     private Date checkInDate;
 
     @ManyToOne
@@ -56,26 +36,15 @@ public class Guest {
         this.presences = new ArrayList<>();
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, String gender, String nationality, Date checkInDate, Cas cas, List<Presence> presences, Migrant migrant) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.nationality = nationality;
+    public Guest(Date checkInDate, Cas cas, List<Presence> presences, Migrant migrant) {
         this.checkInDate = checkInDate;
         this.cas = cas;
         this.presences = presences;
         this.migrant = migrant;
     }
 
-    public Guest(String firstName, String lastName, Date dateOfBirth, String gender, String nationality, Date checkInDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.nationality = nationality;
+    public Guest(Date dateOfBirth, Date checkInDate) {
         this.checkInDate = checkInDate;
-        this.age = DateUtils.ageCalculator(dateOfBirth);
         this.presences = new ArrayList<>();
     }
 
@@ -85,54 +54,6 @@ public class Guest {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
     }
 
     public Date getCheckInDate() {
@@ -167,24 +88,23 @@ public class Guest {
         this.migrant = migrant;
     }
 
-    @Override
-    public String toString() {
-        return this.firstName + " " + this.lastName + " " + this.dateOfBirth + " "
-                + DateUtils.ageCalculator(this.dateOfBirth) + " "
-                + this.getGender() + " " + this.nationality + " " + this.checkInDate;
-    }
-
-    @Override
+    /*@Override
     public int hashCode() {
-        return this.firstName.hashCode() + this.lastName.hashCode() + this.age + this.gender.hashCode() + this.nationality.hashCode();
+        return this.getMigrant().getPersonalRegister().getFirstName().hashCode() +
+                this.getMigrant().getPersonalRegister().getLastName().hashCode() +
+                this.getMigrant().getPersonalRegister().getAge() +
+                this.getMigrant().getPersonalRegister().getGender().hashCode() +
+                this.getMigrant().getPersonalRegister().getNationality().hashCode();
     }
 
     @Override
     public boolean equals(Object guest) {
         Guest that = (Guest) guest;
-        return (this.getFirstName().equals(that.getFirstName()) && this.getLastName().equals(that.getLastName()) &&
-                this.getDateOfBirth().equals(that.getDateOfBirth()) && this.getGender().equals(that.getGender()) &&
-                this.getNationality().equals(that.getNationality()));
-    }
+        return (this.getMigrant().getPersonalRegister().getFirstName().equals(that.getMigrant().getPersonalRegister().getFirstName()) &&
+                this.getMigrant().getPersonalRegister().getLastName().equals(that.getMigrant().getPersonalRegister().getLastName()) &&
+                this.getMigrant().getPersonalRegister().getDateOfBirth().equals(that.getMigrant().getPersonalRegister().getDateOfBirth()) &&
+                this.getMigrant().getPersonalRegister().getGender().equals(that.getMigrant().getPersonalRegister().getGender()) &&
+                this.getMigrant().getPersonalRegister().getNationality().equals(that.getMigrant().getPersonalRegister().getNationality()));
+    }*/
 
 }
