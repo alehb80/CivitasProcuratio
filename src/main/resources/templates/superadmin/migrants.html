@@ -134,6 +134,7 @@
                                         <th>CAS</th>
                                         <th>Indirizzo</th>
                                         <th>Telefono</th>
+                                        <th>Posti Disponibili</th>
                                         <th>Scelta</th>
                                         </thead>
                                         <tbody>
@@ -141,6 +142,7 @@
                                             <td th:text="${cas.name}"></td>
                                             <td th:text="${cas.site}"></td>
                                             <td th:text="${cas.phoneNumber}"></td>
+                                            <td th:text="${cas.getAvailable()}"></td>
                                             <td>
                                                 <input type="radio" th:field="*{checkedCAS}"
                                                 th:value="${cas.id}"/>

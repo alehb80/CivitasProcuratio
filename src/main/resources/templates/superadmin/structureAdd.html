@@ -123,6 +123,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Capienza</label>
+                                                    <input type="text" placeholder="Posti Totali" name="capacity" th:field="*{capacity}"/>
+                                                    <span th:if="${#fields.hasErrors('capacity')}">Errore: campo obbligatorio</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <button type="submit" class="btn btn-primary">Aggiungi</button>
                                         <div class="clearfix"></div>
                                     </form>

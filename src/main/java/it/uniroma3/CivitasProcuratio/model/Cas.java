@@ -37,12 +37,16 @@ public class Cas {
     @OneToMany(mappedBy = "cas")
     private List<AttendanceSheet> attendanceSheets;
 
+    @Column(nullable = false, name = "capacity")
+    private int capacity;
+
     public Cas() {
         this.guests = new ArrayList<>();
         this.attendanceSheets = new ArrayList<>();
     }
 
-    public Cas(String name, String category, String site, String phoneNumber, List<Guest> guests, User user, List<AttendanceSheet> attendanceSheets) {
+    public Cas(String name, String category, String site, String phoneNumber, List<Guest> guests,
+               User user, List<AttendanceSheet> attendanceSheets, int capacity) {
         this.name = name;
         this.category = category;
         this.site = site;
@@ -50,15 +54,17 @@ public class Cas {
         this.phoneNumber = phoneNumber;
         this.user = user;
         this.attendanceSheets = attendanceSheets;
+        this.capacity = capacity;
     }
 
-    public Cas(String name, String category, String site, String phoneNumber) {
+    public Cas(String name, String category, String site, String phoneNumber, int capacity) {
         this.name = name;
         this.category = category;
         this.site = site;
         this.guests = new ArrayList<>();
         this.phoneNumber = phoneNumber;
         this.attendanceSheets = new ArrayList<>();
+        this.capacity = capacity;
     }
 
     public Long getId() {
@@ -123,6 +129,20 @@ public class Cas {
 
     public void setAttendanceSheets(List<AttendanceSheet> attendanceSheets) {
         this.attendanceSheets = attendanceSheets;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getAvailable() {
+        int occupied = this.guests.size();
+
+        return (capacity - occupied) + "/" + capacity;
     }
 
     @Override

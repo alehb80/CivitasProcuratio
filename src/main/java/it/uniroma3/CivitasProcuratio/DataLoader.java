@@ -51,7 +51,7 @@ public class DataLoader implements ApplicationRunner {
         }
         // Nome = "CAS Anzio Portofino", Categoria = "RTI Tre Fontane/Senis Hospes", Ubicazione = "Anzio", Numero Telefonico = "06-9898813"
         if (this.casDAO.findByNameAndCategoryAndSite("CAS Anzio Portofino", "RTI Tre Fontane/Senis Hospes", "Anzio") == null) {
-            Cas cas = new Cas("CAS Anzio Portofino", "RTI Tre Fontane/Senis Hospes", "Anzio", "06-9898813");
+            Cas cas = new Cas("CAS Anzio Portofino", "RTI Tre Fontane/Senis Hospes", "Anzio", "06-9898813", 139);
             this.casDAO.save(cas);
             // Username = "admin1", Password = "admin1"
             if (this.userDAO.findByUsername("admin1") == null) {
@@ -137,7 +137,7 @@ public class DataLoader implements ApplicationRunner {
         }
         // Nome = "CAS Pietralata", Categoria = "Croce Rossa", Ubicazione = "Roma", Numero Telefonico = "06-2262585"
         if (this.casDAO.findByNameAndCategoryAndSite("CAS Pietralata", "Croce Rossa", "Roma") == null) {
-            Cas cas = new Cas("CAS Pietralata", "Croce Rossa", "Roma", "06-2262585");
+            Cas cas = new Cas("CAS Pietralata", "Croce Rossa", "Roma", "06-2262585", 150);
             this.casDAO.save(cas);
             // Username = "admin2", Password = "admin2"
             if (this.userDAO.findByUsername("admin2") == null) {
@@ -223,7 +223,7 @@ public class DataLoader implements ApplicationRunner {
         }
         // Nome = "Parrocchia S.Leone I", Categoria = "Caritas", Ubicazione = "Roma", Numero Telefonico = "06-5298986"
         if (this.casDAO.findByNameAndCategoryAndSite("Parrocchia S.Leone I", "Caritas", "Roma") == null) {
-            Cas cas = new Cas("Parrocchia S.Leone I", "Caritas", "Roma", "06-5298986");
+            Cas cas = new Cas("Parrocchia S.Leone I", "Caritas", "Roma", "06-5298986", 2);
             this.casDAO.save(cas);
             // Username = "admin3", Password = "admin3"
             if (this.userDAO.findByUsername("admin3") == null) {

@@ -23,6 +23,7 @@ public class CasValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "category", "Non deve essere vuoto");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "site", "Non deve essere vuoto");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "Non deve essere vuoto");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "capacity", "Non deve essere vuoto");
 
         // phone number validation
         Cas cas = (Cas) o;
