@@ -1,9 +1,12 @@
 package it.uniroma3.CivitasProcuratio.controller;
 
 import it.uniroma3.CivitasProcuratio.model.Migrant;
+import it.uniroma3.CivitasProcuratio.model.PersonalRegister;
 import it.uniroma3.CivitasProcuratio.service.MigrantService;
+import it.uniroma3.CivitasProcuratio.service.PersonalRegisterService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import it.uniroma3.CivitasProcuratio.util.MigrantValidator;
+import it.uniroma3.CivitasProcuratio.util.PersonalRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -23,29 +27,41 @@ public class MigrantController {
     private MigrantService migrantService;
 
     @Autowired
-    private MigrantValidator validator;
+    private PersonalRegisterService personalRegisterService;
+
+    @Autowired
+    private PersonalRegisterValidator validator;
 
     @RequestMapping("/arrivalsManager/addMigrant")
     public String addMigrant(Model model) {
-        Migrant migrant = new Migrant();
-        migrant.setAssigned(false);
-        model.addAttribute("migrant", migrant);
+        PersonalRegister personalRegister = new PersonalRegister();
+        model.addAttribute("personalRegister", personalRegister);
         return "arrivalsManager/addMigrant";
     }
 
     @RequestMapping(value = "/arrivalsManager/addMigrant", method = RequestMethod.POST)
-    public String newMigrant(@Valid @ModelAttribute("migrant") Migrant migrant, Model model, BindingResult bindingResult) {
-        this.validator.validate(migrant, bindingResult);
-        if (!DateUtils.dateValidation((migrant.getCheckInDate()))) {
+    public String newMigrant(@Valid @ModelAttribute("personalRegister") PersonalRegister personalRegister,
+                             Model model,
+                             BindingResult bindingResult) {
+        this.validator.validate(personalRegister, bindingResult);
+        personalRegister.setAge(DateUtils.ageCalculator(personalRegister.getDateOfBirth()));
+        if (!DateUtils.dateValidation(personalRegister.getDateOfBirth())) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "arrivalsManager/addMigrant";
         }
         else {
-            if (this.migrantService.alreadyExists(migrant)) {
+            if (this.personalRegisterService.alreadyExists(personalRegister)) {
                 model.addAttribute("message", "*ATTENZIONE: migrante già esistente*");
                 return "arrivalsManager/addMigrant";
-            } else {
+            }
+            else {
                 if (!bindingResult.hasErrors()) {
+                    Migrant migrant = new Migrant();
+                    migrant.setAssigned(false);
+                    migrant.setPersonalRegister(personalRegister);
+                    Date checkInDate = Calendar.getInstance().getTime();
+                    migrant.setCheckInDate(checkInDate);
+                    this.personalRegisterService.save(personalRegister);
                     this.migrantService.save(migrant);
                     model.addAttribute("migrantsList", this.migrantService.findAll());
                     return "redirect:/arrivalsManager/migrantsList";

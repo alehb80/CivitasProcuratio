@@ -1,6 +1,5 @@
 package it.uniroma3.CivitasProcuratio.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PresenceForm {

@@ -14,7 +14,7 @@ import java.util.Optional;
 public class Migrant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Long id;
 
@@ -31,7 +31,7 @@ public class Migrant {
     @OneToMany(mappedBy = "migrant", cascade = CascadeType.ALL)
     private List<Guest> guests;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "personal_register_id")
     private PersonalRegister personalRegister;
 
@@ -85,9 +85,11 @@ public class Migrant {
         this.guests = guests;
     }
 
-    /*public Optional getOptionalPersonalRegister() {
+    /*
+    public Optional getOptionalPersonalRegister() {
         return Optional.ofNullable(personalRegister);
-    }*/
+    }
+    */
 
     public PersonalRegister getPersonalRegister() {
         return personalRegister;
