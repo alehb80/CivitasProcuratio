@@ -52,6 +52,7 @@ public class MigrantController {
     public String newMigrant(@Valid @ModelAttribute("personalRegister") PersonalRegister personalRegister,
                              Model model,
                              BindingResult bindingResult) {
+
         this.validator.validate(personalRegister, bindingResult);
         personalRegister.setAge(DateUtils.ageCalculator(personalRegister.getDateOfBirth()));
         if (!DateUtils.dateValidation(personalRegister.getDateOfBirth())) {
@@ -71,6 +72,7 @@ public class MigrantController {
                     migrant.setPersonalRegister(personalRegister);
                     Date checkInDate = Calendar.getInstance().getTime();
                     migrant.setCheckInDate(checkInDate);
+                    migrant.setFullName(personalRegister.getFullName());
                     this.personalRegisterService.save(personalRegister);
                     this.migrantService.save(migrant);
                     model.addAttribute("migrantsList", this.migrantService.findAll());

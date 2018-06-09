@@ -12,7 +12,7 @@ import java.util.Date;
 public class PersonalRegister {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
 
@@ -42,17 +42,6 @@ public class PersonalRegister {
     private Migrant migrant;
 
     public PersonalRegister() {
-    }
-
-    public PersonalRegister(String firstName, String lastName, String fullName, Date dateOfBirth, Integer age, String gender, String nationality, Migrant migrant) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
-        this.age = DateUtils.ageCalculator(dateOfBirth);
-        this.gender = gender;
-        this.nationality = nationality;
-        this.migrant = migrant;
     }
 
     public PersonalRegister(String firstName, String lastName, String fullName, Date dateOfBirth, String gender, String nationality) {

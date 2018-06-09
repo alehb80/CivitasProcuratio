@@ -14,7 +14,7 @@ import java.util.Optional;
 public class Migrant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="id")
     private Long id;
 
@@ -41,9 +41,6 @@ public class Migrant {
     @ManyToOne
     @JoinColumn(name = "family_unit_id")
     private FamilyUnit familyUnit;
-
-    @OneToOne(mappedBy = "familyHead")
-    private FamilyUnit familyOwn;
 
     public Migrant() {
         this.assigned = false;
@@ -104,12 +101,6 @@ public class Migrant {
         this.guests = guests;
     }
 
-    /*
-    public Optional getOptionalPersonalRegister() {
-        return Optional.ofNullable(personalRegister);
-    }
-    */
-
     public PersonalRegister getPersonalRegister() {
         return personalRegister;
     }
@@ -124,14 +115,6 @@ public class Migrant {
 
     public void setFamilyUnit(FamilyUnit familyUnit) {
         this.familyUnit = familyUnit;
-    }
-
-    public FamilyUnit getFamilyOwn() {
-        return familyOwn;
-    }
-
-    public void setFamilyOwn(FamilyUnit familyOwn) {
-        this.familyOwn = familyOwn;
     }
 
     public Guest currentGuest() {

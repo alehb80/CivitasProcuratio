@@ -6,6 +6,8 @@ import it.uniroma3.CivitasProcuratio.model.Migrant;
 import it.uniroma3.CivitasProcuratio.model.PersonalRegister;
 import it.uniroma3.CivitasProcuratio.service.GuestService;
 import it.uniroma3.CivitasProcuratio.service.CasService;
+import it.uniroma3.CivitasProcuratio.service.MigrantService;
+import it.uniroma3.CivitasProcuratio.service.PersonalRegisterService;
 import it.uniroma3.CivitasProcuratio.util.DateUtils;
 import it.uniroma3.CivitasProcuratio.util.PersonalRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -28,6 +31,12 @@ public class GuestController {
 
     @Autowired
     private GuestService guestService;
+
+    @Autowired
+    private PersonalRegisterService personalRegisterService;
+
+    @Autowired
+    private MigrantService migrantService;
 
     @Autowired
     private PersonalRegisterValidator validator;
@@ -43,48 +52,54 @@ public class GuestController {
         return "user/guestList";
     }
 
-    @RequestMapping("/admin/guestForm/{id}")
-    public String showForm(@PathVariable("id") Long id, Model model) {
-        Guest guest = new Guest();
-        guest.setMigrant(new Migrant());
-        Cas cas = casService.findOne(id);
-        guest.setCas(cas);
+    @RequestMapping("/admin/guestForm")
+    public String showForm(Model model) {
         PersonalRegister personalRegister = new PersonalRegister();
-        guest.getMigrant().setPersonalRegister(personalRegister);
         model.addAttribute("personalRegister", personalRegister);
-        model.addAttribute("guest", guest);
         return "admin/guestAdd";
     }
 
     @RequestMapping(value = "/admin/guestAdd/{id}", method = RequestMethod.POST)
-    public String newGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
-        this.validator.validate(guest.getMigrant().getPersonalRegister(), bindingResult);
-        Cas cas = casService.findOne(id);
-        guest.setCas(cas);
-        guest.getMigrant().getPersonalRegister().setAge(DateUtils.ageCalculator(guest.getMigrant().getPersonalRegister().getDateOfBirth()));
-        if (!DateUtils.dateValidation(guest.getMigrant().getPersonalRegister().getDateOfBirth())) {
+    public String newGuest(@PathVariable("id") Long id,
+                           @Valid @ModelAttribute("personalRegister") PersonalRegister personalRegister,
+                           Model model,
+                           BindingResult bindingResult) {
+
+        this.validator.validate(personalRegister, bindingResult);
+        personalRegister.setAge(DateUtils.ageCalculator(personalRegister.getDateOfBirth()));
+        if (!DateUtils.dateValidation(personalRegister.getDateOfBirth())) {
             model.addAttribute("message", "*ATTENZIONE: la data inserita non è corretta*");
             return "admin/guestAdd";
         }
         else {
-            if (this.guestService.alreadyExists(guest)) {
-                model.addAttribute("message", "ATTENZIONE: ospite inserito già esistente!");
+            if (this.personalRegisterService.alreadyExists(personalRegister)) {
+                model.addAttribute("message", "ATTENZIONE: ospite già esistente!");
                 return "admin/guestAdd";
             }
             else {
                 if (!bindingResult.hasErrors()) {
-
+                    personalRegister.setId(null);
+                    Migrant migrant = new Migrant();
+                    migrant.setAssigned(false);
+                    migrant.setArrived(false);
+                    migrant.setPersonalRegister(personalRegister);
+                    Date checkInDate = Calendar.getInstance().getTime();
+                    migrant.setCheckInDate(checkInDate);
+                    this.personalRegisterService.save(personalRegister);
+                    this.migrantService.save(migrant);
+                    Guest guest = new Guest();
+                    guest.setMigrant(migrant);
+                    guest.setCas(this.casService.findOne(id));
+                    guest.setCheckInDate(Calendar.getInstance().getTime());
                     this.guestService.save(guest);
-                    model.addAttribute("guest", guest);
-                    model.addAttribute("cas", cas);
-                    model.addAttribute("guests", this.guestService.findByCas(cas));
+                    model.addAttribute("guests", this.guestService.findByCas(this.casService.findOne(id)));
                     return "admin/guests";
                 }
             }
         }
         return "admin/guestAdd";
     }
-
+    /*
     @RequestMapping(value = "/admin/updateGuest/{id}", method = RequestMethod.POST)
     public String updateGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
         this.validator.validate(guest.getMigrant().getPersonalRegister(), bindingResult);
@@ -112,6 +127,7 @@ public class GuestController {
         }
         return "admin/updateGuest";
     }
+    */
 
     @RequestMapping(value = "/admin/guestDelete/{id}", method = RequestMethod.POST)
     public String deleteGuest(@PathVariable("id") Long id, Model model) {
