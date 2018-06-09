@@ -78,6 +78,7 @@ public class GuestController {
             }
             else {
                 if (!bindingResult.hasErrors()) {
+                    //Problema con l'id del personalRegister (si setta in automatico)
                     personalRegister.setId(null);
                     Migrant migrant = new Migrant();
                     migrant.setAssigned(false);
@@ -99,6 +100,15 @@ public class GuestController {
         }
         return "admin/guestAdd";
     }
+    /*
+    @RequestMapping("/admin/showUpdateGuest/{id}")
+    public String showUpdate(@PathVariable("id") Long idGuest, Model model) {
+        Guest guest = this.guestService.findOne(idGuest);
+        model.addAttribute("cas", this.casService.findOne(guest.getCas().getId()));
+        model.addAttribute("guest", guest);
+        return "admin/updateGuest";
+    }
+    */
     /*
     @RequestMapping(value = "/admin/updateGuest/{id}", method = RequestMethod.POST)
     public String updateGuest(@PathVariable("id") Long id, @Valid @ModelAttribute("guest") Guest guest, Model model, BindingResult bindingResult) {
@@ -150,14 +160,6 @@ public class GuestController {
         model.addAttribute("cas", cas);
         model.addAttribute("guests", this.guestService.findByCas(cas));
         return "admin/guests";
-    }
-
-    @RequestMapping("/admin/showUpdateGuest/{id}")
-    public String showUpdate(@PathVariable("id") Long idGuest, Model model) {
-        Guest guest = this.guestService.findOne(idGuest);
-        model.addAttribute("cas", this.casService.findOne(guest.getCas().getId()));
-        model.addAttribute("guest", guest);
-        return "admin/updateGuest";
     }
 
     @InitBinder
