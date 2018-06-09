@@ -17,6 +17,19 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'/>
+
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript" />
+
+    <script type = "text/javascript">
+        $(document).ready(function(){
+            $('#checkAll').click(function(){
+                if ($(this).is(":checked"))
+                    $('.chkCheckBox').prop('checked', true);
+                else
+                    $('.chkCheckBox').prop('checked', false);
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="wrapper">
@@ -107,7 +120,9 @@
                                             <th>Data Di Nascita</th>
                                             <th>Sesso</th>
                                             <th>Nazionalità</th>
-                                            <th><input type="checkbox" th:id="checkAll"/></th>
+                                            <th>
+                                                <input type="checkbox" th:id="checkAll"/>
+                                            </th>
                                         </thead>
                                         <tbody>
                                         <tr th:each="guest : ${migrantsList}">
@@ -123,8 +138,8 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <button type="submit">Conferma</button>
                                 </div>
-                                <button type="submit">Conferma</button>
                             </div>
                         </div>
                     </form>

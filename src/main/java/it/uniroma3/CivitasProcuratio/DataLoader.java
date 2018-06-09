@@ -59,84 +59,6 @@ public class DataLoader implements ApplicationRunner {
                 admin.setCas(cas);
                 this.userDAO.save(admin);
             }
-            // FirstName = "Dame", LastName = "Diop", DateOfBirth = "1987-04-09", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-03-06"
-            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Dame", "Diop", "M", "Senegal") == null) {
-                String myDate = "1987-04-09";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
-                PersonalRegister personalRegister = new PersonalRegister("Dame", "Diop", "Dame Diop", dateOfBirth, "M", "Senegal");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Dame Diop");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-03-02";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-03-06";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Celestine", LastName = "Babayaro", DateOfBirth = "1992-03-09", Gender = "F", Nationality = "Nigeria", CheckInDate = "2018-04-06"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Celestine", "Babayaro", "F", "Nigeria") == null) {
-                String myDate = "1992-03-09";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
-                PersonalRegister personalRegister = new PersonalRegister("Celestine", "Babayaro", "Celestine Babayaro", dateOfBirth, "F", "Nigeria");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Celestine Babayaro");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-04-02";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-04-06";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Karim", LastName = "Essediri", DateOfBirth = "1990-06-07", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-02-18"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Karim", "Essediri", "M", "Tunisia") == null) {
-                String myDate = "1990-06-07";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
-                PersonalRegister personalRegister = new PersonalRegister("Karim", "Essediri", "Karim Essediri", dateOfBirth, "M", "Tunisia");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Karim Essediri");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-02-13";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-02-18";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }*/
         }
         // Nome = "CAS Pietralata", Categoria = "Croce Rossa", Ubicazione = "Roma", Numero Telefonico = "06-2262585"
         if (this.casDAO.findByNameAndCategoryAndSite("CAS Pietralata", "Croce Rossa", "Roma") == null) {
@@ -148,111 +70,6 @@ public class DataLoader implements ApplicationRunner {
                 admin.setCas(cas);
                 this.userDAO.save(admin);
             }
-            // FirstName = "Emmanuel", LastName = "Mendy", DateOfBirth = "1995-11-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-02-02"
-            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Emmanuel", "Mendy", "M", "Senegal") == null) {
-                String myDate1 = "1995-11-26";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Emmanuel","Mendy", "Emmanuel Mendy", dateOfBirth, "M", "Senegal");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Emmanuel Mendy");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-01-27";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-02-02";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Hassen", LastName = "Gabsi", DateOfBirth = "1985-03-16", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-05-03"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Hassen", "Gabsi", "M", "Tunisia") == null) {
-                String myDate1 = "1985-03-16";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Hassen", "Gabsi", "Hassen Gabsi", dateOfBirth, "M", "Tunisia");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Hassen Gabsi");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-04-29";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-05-03";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Fabien", LastName = "Camus", DateOfBirth = "1997-08-27", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-05-02"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Fabien", "Camus", "M", "Tunisia") == null) {
-                String myDate1 = "1997-08-27";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Fabien", "Camus", "Fabien Camus", dateOfBirth, "M", "Tunisia");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Fabien Camus");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-04-29";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-05-02";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-
-
-
-
-
-
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Mama", "Diop", "M", "Senegal") == null) {
-                String myDate1 = "1990-02-20";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Mama", "Diop", "Mama Diop", dateOfBirth, "M", "Senegal");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Mama Diop");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-05-29";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                this.migrantDAO.save(migrant);
-            }*/
-
-
-
-
-
-
         }
         // Nome = "Parrocchia S.Leone I", Categoria = "Caritas", Ubicazione = "Roma", Numero Telefonico = "06-5298986"
         if (this.casDAO.findByNameAndCategoryAndSite("Parrocchia S.Leone I", "Caritas", "Roma") == null) {
@@ -264,83 +81,152 @@ public class DataLoader implements ApplicationRunner {
                 admin.setCas(cas);
                 this.userDAO.save(admin);
             }
-            // FirstName = "Alfred", LastName = "Gomis", DateOfBirth = "1997-01-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-04-22"
-            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Alfred", "Gomis", "M", "Senegal") == null) {
-                String myDate1 = "1997-01-26";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Alfred", "Gomis", "Alfred Gomis", dateOfBirth, "M", "Senegal");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Alfred Gomis");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-04-15";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-04-22";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Isah", LastName = "Eliakwu", DateOfBirth = "1996-12-22", Gender = "F", Nationality = "Nigeria", CheckInDate = "2018-01-22"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Isah", "Eliakwu", "F", "Nigeria") == null) {
-                String myDate1 = "1996-12-22";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Isah", "Eliakwu", "Isah Eliakwu", dateOfBirth, "F", "Nigeria");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Isah Eliakwu");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-01-14";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-01-22";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                guest.setMigrant(migrant);
-                this.guestDAO.save(guest);
-            }
-            // FirstName = "Anice", LastName = "Badri", DateOfBirth = "1997-09-12", Gender = "F", Nationality = "Tunisia", CheckInDate = "2018-03-18"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Anice", "Badri", "F", "Tunisia") == null) {
-                String myDate1 = "1997-09-12";
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
-                PersonalRegister personalRegister = new PersonalRegister("Anice", "Badri", "Anice Badri", dateOfBirth, "F", "Tunisia");
-                this.personalRegisterDAO.save(personalRegister);
-                Migrant migrant = new Migrant();
-                migrant.setFullName("Anice Badri");
-                migrant.setPersonalRegister(personalRegister);
-                String myDate3 = "2018-05-28";
-                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
-                migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
-                this.migrantDAO.save(migrant);
-
-                Guest guest = new Guest();
-                String myDate2 = "2018-03-18";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                this.guestDAO.save(guest);
-            }*/
         }
+        // FirstName = "Dame", LastName = "Diop", DateOfBirth = "1987-04-09", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-03-06"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Dame", "Diop", "M", "Senegal") == null) {
+            String myDate = "1987-04-09";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
+            PersonalRegister personalRegister = new PersonalRegister("Dame", "Diop", "Dame Diop", dateOfBirth, "M", "Senegal");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Dame Diop");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-03-02";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Celestine", LastName = "Babayaro", DateOfBirth = "1992-03-09", Gender = "F", Nationality = "Nigeria", CheckInDate = "2018-04-06"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Celestine", "Babayaro", "F", "Nigeria") == null) {
+            String myDate = "1992-03-09";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
+            PersonalRegister personalRegister = new PersonalRegister("Celestine", "Babayaro", "Celestine Babayaro", dateOfBirth, "F", "Nigeria");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Celestine Babayaro");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-04-02";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Karim", LastName = "Essediri", DateOfBirth = "1990-06-07", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-02-18"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Karim", "Essediri", "M", "Tunisia") == null) {
+            String myDate = "1990-06-07";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
+            PersonalRegister personalRegister = new PersonalRegister("Karim", "Essediri", "Karim Essediri", dateOfBirth, "M", "Tunisia");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Karim Essediri");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-02-13";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        /*
+        // FirstName = "Emmanuel", LastName = "Mendy", DateOfBirth = "1995-11-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-02-02"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Emmanuel", "Mendy", "M", "Senegal") == null) {
+            String myDate1 = "1995-11-26";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Emmanuel","Mendy", "Emmanuel Mendy", dateOfBirth, "M", "Senegal");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Emmanuel Mendy");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-01-27";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Hassen", LastName = "Gabsi", DateOfBirth = "1985-03-16", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-05-03"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Hassen", "Gabsi", "M", "Tunisia") == null) {
+            String myDate1 = "1985-03-16";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Hassen", "Gabsi", "Hassen Gabsi", dateOfBirth, "M", "Tunisia");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Hassen Gabsi");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-04-29";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Fabien", LastName = "Camus", DateOfBirth = "1997-08-27", Gender = "M", Nationality = "Tunisia", CheckInDate = "2018-05-02"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Fabien", "Camus", "M", "Tunisia") == null) {
+            String myDate1 = "1997-08-27";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Fabien", "Camus", "Fabien Camus", dateOfBirth, "M", "Tunisia");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Fabien Camus");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-04-29";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Alfred", LastName = "Gomis", DateOfBirth = "1997-01-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-04-22"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Alfred", "Gomis", "M", "Senegal") == null) {
+            String myDate1 = "1997-01-26";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Alfred", "Gomis", "Alfred Gomis", dateOfBirth, "M", "Senegal");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Alfred Gomis");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-04-15";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Isah", LastName = "Eliakwu", DateOfBirth = "1996-12-22", Gender = "F", Nationality = "Nigeria", CheckInDate = "2018-01-22"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Isah", "Eliakwu", "F", "Nigeria") == null) {
+            String myDate1 = "1996-12-22";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Isah", "Eliakwu", "Isah Eliakwu", dateOfBirth, "F", "Nigeria");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Isah Eliakwu");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-01-14";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        // FirstName = "Anice", LastName = "Badri", DateOfBirth = "1997-09-12", Gender = "F", Nationality = "Tunisia", CheckInDate = "2018-03-18"
+        if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Anice", "Badri", "F", "Tunisia") == null) {
+            String myDate1 = "1997-09-12";
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
+            PersonalRegister personalRegister = new PersonalRegister("Anice", "Badri", "Anice Badri", dateOfBirth, "F", "Tunisia");
+            this.personalRegisterDAO.save(personalRegister);
+            Migrant migrant = new Migrant();
+            migrant.setFullName("Anice Badri");
+            migrant.setPersonalRegister(personalRegister);
+            String myDate3 = "2018-05-28";
+            SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+            Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
+            migrant.setCheckInDate(checkInDate2);
+            this.migrantDAO.save(migrant);
+        }
+        */
     }
 }

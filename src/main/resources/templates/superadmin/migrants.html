@@ -59,7 +59,7 @@
                 </li>
                 <li class="active">
                     <a th:href="@{/superadmin/migrants}">
-                        <i class="material-icons">content_paste</i>
+                        <i class="material-icons">group</i>
                         <p>Lista Migranti</p>
                     </a>
                 </li>
@@ -108,7 +108,9 @@
                                             <th>Data Di Arrivo</th>
                                             <th>Assegnato</th>
                                             <th>Arrivato</th>
-                                            <th><input type="checkbox" th:id="checkAll"/></th>
+                                            <th>
+                                                <input type="checkbox" th:id="checkAll"/>
+                                            </th>
                                         </thead>
                                         <tbody>
                                             <tr th:each="migrant : ${migrantsList}">
@@ -152,8 +154,10 @@
                                     </table>
                                 </div>
                             </div>
+                            <div>
+                                <button type="submit">Conferma</button>
+                            </div>
                         </div>
-                        <button type="submit">Conferma</button>
                     </form>
                 </div>
             </div>
