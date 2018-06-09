@@ -3,6 +3,7 @@ package it.uniroma3.CivitasProcuratio.service;
 import it.uniroma3.CivitasProcuratio.dao.GuestDAO;
 import it.uniroma3.CivitasProcuratio.model.Cas;
 import it.uniroma3.CivitasProcuratio.model.Guest;
+import it.uniroma3.CivitasProcuratio.model.Migrant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,16 @@ public class GuestService {
     @Transactional
     public List<Guest> findByCas(Cas cas) {
         return this.guestDAO.findByCas(cas);
+    }
+
+    @Transactional
+    public List<Guest> findAllByCasAndMigrantArrived(Cas cas, boolean arrived) {
+        return this.guestDAO.findAllByCasAndMigrantArrived(cas, arrived);
+    }
+
+    @Transactional
+    public Guest findByMigrant(Migrant migrant) {
+        return this.guestDAO.findByMigrant(migrant);
     }
 
     public boolean alreadyExists(Guest guest) {

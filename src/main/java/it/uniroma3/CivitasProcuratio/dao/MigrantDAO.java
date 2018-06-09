@@ -10,5 +10,9 @@ import java.util.List;
 @Transactional
 @Repository
 public interface MigrantDAO extends CrudRepository<Migrant, Long> {
+
     List<Migrant> findAllByAssigned(boolean assigned);
+
+    List<Migrant> findAllByArrived(boolean arrived);
+
 }

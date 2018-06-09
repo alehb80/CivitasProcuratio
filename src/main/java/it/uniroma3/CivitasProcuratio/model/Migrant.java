@@ -28,6 +28,9 @@ public class Migrant {
     @Column(nullable = false, name="assigned")
     private boolean assigned;
 
+    @Column(nullable = false, name="arrived")
+    private boolean arrived;
+
     @OneToMany(mappedBy = "migrant", cascade = CascadeType.ALL)
     private List<Guest> guests;
 
@@ -83,6 +86,14 @@ public class Migrant {
 
     public void setAssigned(boolean assigned) {
         this.assigned = assigned;
+    }
+
+    public boolean isArrived() {
+        return arrived;
+    }
+
+    public void setArrived(boolean arrived) {
+        this.arrived = arrived;
     }
 
     public List<Guest> getGuests() {

@@ -84,12 +84,14 @@
                                         <th>Nome Completo</th>
                                         <th>Data Di Arrivo</th>
                                         <th>Assegnato</th>
+                                        <th>Arrivato</th>
                                     </thead>
                                     <tbody>
                                     <tr th:each="migrant : ${migrantsList}">
                                         <td th:text="${migrant.personalRegister.fullName}"></td>
                                         <td th:text="${#dates.format(migrant.checkInDate, 'dd-MM-yyyy')}"></td>
-                                        <td th:text="${migrant.isAssigned()}"></td>
+                                        <td th:text="${migrant.assigned}"></td>
+                                        <td th:text="${migrant.arrived}"></td>
                                         <td>
                                             <form th:action="@{'/arrivalsManager/migrantDelete' + '/' + ${migrant.id}}" method="post">
                                                 <div class="input">

@@ -3,7 +3,9 @@ package it.uniroma3.CivitasProcuratio.model;
 import java.util.List;
 
 public class MigrantAssignmentForm {
+
     private List<Long> checkedMigrants;
+
     private Long checkedCAS;
 
     public MigrantAssignmentForm() {
@@ -24,4 +26,5 @@ public class MigrantAssignmentForm {
     public void setCheckedCAS(Long checkedCAS) {
         this.checkedCAS = checkedCAS;
     }
+
 }

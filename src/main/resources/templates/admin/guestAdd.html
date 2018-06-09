@@ -44,6 +44,12 @@
                             <p>CAS</p>
                         </a>
                     </li>
+                    <li>
+                        <a th:href="@{'/admin/adminMigrants' + '/' + ${session.user.cas.id}}">
+                            <i class="material-icons">group</i>
+                            <p>Migranti Da Confermare</p>
+                        </a>
+                    </li>
                     <li class="active">
                         <a th:href="@{'/admin/adminGuests' + '/' + ${session.user.cas.id}}">
                             <i class="material-icons">group</i>

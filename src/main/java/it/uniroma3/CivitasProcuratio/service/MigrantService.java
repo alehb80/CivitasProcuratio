@@ -30,6 +30,11 @@ public class MigrantService {
     }
 
     @Transactional
+    public List<Migrant> findAllByArrived(boolean arrived) {
+        return this.migrantDAO.findAllByArrived(arrived);
+    }
+
+    @Transactional
     public Migrant findOne(Long id) {
         return this.migrantDAO.findOne(id);
     }

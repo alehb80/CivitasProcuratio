@@ -67,6 +67,7 @@ public class MigrantController {
                 if (!bindingResult.hasErrors()) {
                     Migrant migrant = new Migrant();
                     migrant.setAssigned(false);
+                    migrant.setArrived(false);
                     migrant.setPersonalRegister(personalRegister);
                     Date checkInDate = Calendar.getInstance().getTime();
                     migrant.setCheckInDate(checkInDate);
@@ -96,33 +97,62 @@ public class MigrantController {
     @RequestMapping("/superadmin/migrants")
     public String migrants(Model model) {
         model.addAttribute("casList", this.casService.findAll());
-        model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
+        model.addAttribute("migrantsList", this.migrantService.findAllByArrived(false));
         model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
         return "superadmin/migrants";
     }
 
     @RequestMapping(value = "/superadmin/migrants", method = RequestMethod.POST)
-    public String migrantsDone(@ModelAttribute("migrantAssignmentForm") MigrantAssignmentForm form,
-                               Model model) {
+    public String migrantsDone(@ModelAttribute("migrantAssignmentForm") MigrantAssignmentForm form, Model model) {
 
         Long casId = form.getCheckedCAS();
 
         for (Long migrantId : form.getCheckedMigrants()) {
             Migrant migrant = this.migrantService.findOne(migrantId);
             migrant.setAssigned(true);
-
-            Guest guest = new Guest();
-            guest.setMigrant(this.migrantService.findOne(migrantId));
-            guest.setCas(this.casService.findOne(casId));
-
-            this.migrantService.save(migrant);
-            this.guestService.save(guest);
-
+            if (this.guestService.findByMigrant(this.migrantService.findOne(migrantId)) != null) {
+                this.guestService.findByMigrant(this.migrantService.findOne(migrantId)).setMigrant(this.migrantService.findOne(migrantId));
+                this.guestService.findByMigrant(this.migrantService.findOne(migrantId)).setCas(this.casService.findOne(casId));
+                this.migrantService.save(migrant);
+                this.guestService.save(this.guestService.findByMigrant(this.migrantService.findOne(migrantId)));
+            }
+            else {
+                Guest guest = new Guest();
+                guest.setMigrant(this.migrantService.findOne(migrantId));
+                guest.setCas(this.casService.findOne(casId));
+                this.migrantService.save(migrant);
+                this.guestService.save(guest);
+            }
             model.addAttribute("casList", this.casService.findAll());
-            model.addAttribute("migrantsList", this.migrantService.findAllByAssigned(false));
+            model.addAttribute("migrantsList", this.migrantService.findAllByArrived(false));
             model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
         }
         return "superadmin/migrants";
+    }
+
+    @RequestMapping("/admin/adminMigrants/{id}")
+    public String adminMigrants(@PathVariable("id") Long idCas, Model model) {
+        model.addAttribute("migrantsList", this.guestService.findAllByCasAndMigrantArrived(this.casService.findOne(idCas), false));
+        model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
+        return "admin/adminMigrants";
+    }
+
+    @RequestMapping(value = "/admin/migrantsArrived/{id}", method = RequestMethod.POST)
+    public String migrantsArrived(@PathVariable("id") Long idCas,
+                                  @ModelAttribute("migrantAssignmentForm") MigrantAssignmentForm form,
+                                  Model model) {
+        for (Long migrantId : form.getCheckedMigrants()) {
+            Migrant migrant = this.migrantService.findOne(migrantId);
+            migrant.setArrived(true);
+            this.guestService.findByMigrant(this.migrantService.findOne(migrantId)).setMigrant(this.migrantService.findOne(migrantId));
+            Date checkInDate = Calendar.getInstance().getTime();
+            this.guestService.findByMigrant(this.migrantService.findOne(migrantId)).setCheckInDate(checkInDate);
+            this.migrantService.save(migrant);
+            this.guestService.save(this.guestService.findByMigrant(this.migrantService.findOne(migrantId)));
+        }
+        model.addAttribute("migrantsList", this.guestService.findAllByCasAndMigrantArrived(this.casService.findOne(idCas), false));
+        model.addAttribute("migrantAssignmentForm", new MigrantAssignmentForm());
+        return "admin/adminMigrants";
     }
 
     @InitBinder

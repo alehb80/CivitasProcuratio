@@ -60,7 +60,7 @@ public class DataLoader implements ApplicationRunner {
                 this.userDAO.save(admin);
             }
             // FirstName = "Dame", LastName = "Diop", DateOfBirth = "1987-04-09", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-03-06"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Dame", "Diop", "M", "Senegal") == null) {
+            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Dame", "Diop", "M", "Senegal") == null) {
                 String myDate = "1987-04-09";
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateOfBirth = sdf1.parse(String.valueOf(myDate));
@@ -136,7 +136,7 @@ public class DataLoader implements ApplicationRunner {
                 guest.setCas(cas);
                 guest.setMigrant(migrant);
                 this.guestDAO.save(guest);
-            }
+            }*/
         }
         // Nome = "CAS Pietralata", Categoria = "Croce Rossa", Ubicazione = "Roma", Numero Telefonico = "06-2262585"
         if (this.casDAO.findByNameAndCategoryAndSite("CAS Pietralata", "Croce Rossa", "Roma") == null) {
@@ -149,7 +149,7 @@ public class DataLoader implements ApplicationRunner {
                 this.userDAO.save(admin);
             }
             // FirstName = "Emmanuel", LastName = "Mendy", DateOfBirth = "1995-11-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-02-02"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Emmanuel", "Mendy", "M", "Senegal") == null) {
+            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Emmanuel", "Mendy", "M", "Senegal") == null) {
                 String myDate1 = "1995-11-26";
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
@@ -227,6 +227,11 @@ public class DataLoader implements ApplicationRunner {
                 this.guestDAO.save(guest);
             }
 
+
+
+
+
+
             if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Mama", "Diop", "M", "Senegal") == null) {
                 String myDate1 = "1990-02-20";
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -240,17 +245,14 @@ public class DataLoader implements ApplicationRunner {
                 SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
                 Date checkInDate2 = sdf3.parse(String.valueOf(myDate3));
                 migrant.setCheckInDate(checkInDate2);
-                migrant.setAssigned(true);
                 this.migrantDAO.save(migrant);
+            }*/
 
-                Guest guest = new Guest();
-                String myDate2 = "2018-03-18";
-                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date checkInDate = sdf2.parse(String.valueOf(myDate2));
-                guest.setCheckInDate(checkInDate);
-                guest.setCas(cas);
-                this.guestDAO.save(guest);
-            }
+
+
+
+
+
         }
         // Nome = "Parrocchia S.Leone I", Categoria = "Caritas", Ubicazione = "Roma", Numero Telefonico = "06-5298986"
         if (this.casDAO.findByNameAndCategoryAndSite("Parrocchia S.Leone I", "Caritas", "Roma") == null) {
@@ -263,7 +265,7 @@ public class DataLoader implements ApplicationRunner {
                 this.userDAO.save(admin);
             }
             // FirstName = "Alfred", LastName = "Gomis", DateOfBirth = "1997-01-26", Gender = "M", Nationality = "Senegal", CheckInDate = "2018-04-22"
-            if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Alfred", "Gomis", "M", "Senegal") == null) {
+            /*if (this.personalRegisterDAO.findByFirstNameAndLastNameAndGenderAndNationality("Alfred", "Gomis", "M", "Senegal") == null) {
                 String myDate1 = "1997-01-26";
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateOfBirth = sdf1.parse(String.valueOf(myDate1));
@@ -338,7 +340,7 @@ public class DataLoader implements ApplicationRunner {
                 guest.setCheckInDate(checkInDate);
                 guest.setCas(cas);
                 this.guestDAO.save(guest);
-            }
+            }*/
         }
     }
 }
