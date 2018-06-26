@@ -1,0 +1,256 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8" />
+<link rel="italy" sizes="99x66" th:href="@{/images/demo/italy.png}" />
+<link rel="icon" type="image/png" th:href="@{/images/demo/italy.png}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>CivitasProcuratio</title>
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<!-- Bootstrap core CSS     -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<!--  Material Dashboard CSS    -->
+<link th:href="@{/css/material-dashboard.css}" rel="stylesheet" />
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link th:href="@{/css/demo.css}" rel="stylesheet" />
+<!--     Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css' />
+
+<script src="/js/jquery-3.2.1.min.js" type="text/javascript" />
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#checkAll').click(function(){
+                if ($(this).is(":checked"))
+                    $('.chkCheckBox').prop('checked', true);
+                else
+                    $('.chkCheckBox').prop('checked', false);
+            });
+        });
+    </script>
+<style>
+/* Set the size of the div element that contains the map */
+#map {
+	height: 500px; /* The height is 400 pixels */
+	width: 100%;
+	margin-top: 0px; /* The width is the width of the web page */
+}
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="sidebar" data-color="blue" id="para2">
+			<div class="logo">
+				<a class="simple-text" th:text="${session.user.username}"></a>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<li><a th:href="@{/role}"> <i class="material-icons">dashboard</i>
+							<p>Home</p>
+					</a></li>
+					<li><a th:href="@{/superadmin/profile}"> <i
+							class="material-icons">person</i>
+							<p>Profilo</p>
+					</a></li>
+					<li><a th:href="@{/superadmin/structuresManagement}"> <i
+							class="material-icons">content_paste</i>
+							<p>CAS</p>
+					</a></li>
+					<li><a th:href="@{/superadmin/migrants}"> <i
+							class="material-icons">group</i>
+							<p>Lista Migranti</p>
+					</a></li>
+					<li class="active"><a th:href="@{/superadmin/maps}"> <i
+							class="material-icons">add_location</i>
+							<p>Mappa</p>
+					</a></li>
+					<li class="active-pro"><a th:href="@{/logout}"> <i
+							class="material-icons">input</i>
+							<p>Logout</p>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-panel">
+
+			<div class="container-fluid">
+				<div class="row">
+					<div id="map"></div>
+					<h4>Inserisci un nuovo luogo di interesse</h4>
+				</div>
+				<div class="row">
+					<form action="/superadmin/maps/addPlace" method="post"
+						id="newPlace">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<input type="text" class="form-control" name="name" id="name"
+									placeholder="Inserisci il nome del luogo">
+							</div>
+
+							<div class="form-group">
+								<input type="text" class="form-control" id="address"
+									name="address" placeholder="Inserisci indirizzo e città">
+							</div>
+							<input type="hidden" name="lat" id="lat"> <input
+								type="hidden" name="lng" id="lng">
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<select class="form-control" form="newPlace" id="categories"
+									onchange="isCAS()" name="category">
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="number" class="form-control" id="capacity"
+									name="capacity" placeholder="Inserisci la capienzà">
+							</div>
+
+
+						</div>
+						<div class="col-sm-4">
+							<input id="findLatLng" type="button" value="Verifica Indirizzo"
+								class="btn btn-primary">
+							<button id="AddPlaceButton" type="submit" class="btn btn-primary"
+								disabled>Aggiungi luogo</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:inline="javascript">
+    var categories = ["CAS","Assistenza legale", "Ospedale", "Ufficio Immigrazione"];
+    colors=["eea2ee", "1a7468", "b4d622", "3c877b"]
+    for (var i = 0; i < categories.length; i++) {
+      createOptionWithValue(categories[i]);
+    }
+    function createOptionWithValue(value){
+      var option = document.createElement('option');
+      option.value = value;
+      option.text=value;
+      document.getElementById("categories").appendChild(option);
+    }
+    
+    function isCAS(){
+    		if(document.getElementById("categories").value=='CAS'){
+    			document.getElementById("capacity").type = "number";
+    		}
+    		else document.getElementById("capacity").type = "hidden";
+    }
+
+    // Initialize and add the map
+    function initMap() {
+      // The location of Rome
+      var rome = {lat: 41.89193, lng: 12.51133};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 11, center: rome});
+      var places = [[${places}]];
+      var place2infoWindow={}
+      for (var i = 0; i < places.length; i++) {
+    	  let contentString = '<div id="content">'+
+          '<h4>'+places[i].name+'</h4>'+
+          '<div id="bodyContent">'+
+          '<p>Descrizione: '+places[i].description+'</p>'+
+          '<p> Categoria: '+places[i].category+'</p>'+
+          '<p> Capienza: '+places[i].capacity+'</p>'+
+          '</div>'+
+          '</div>';
+        var latLng = new google.maps.LatLng(places[i].lat,places[i].lng);
+        place2infoWindow[latLng] = new google.maps.InfoWindow({content: contentString});
+        if(places[i].category == "CAS"){
+	        	let casCircle = new google.maps.Circle({
+	                strokeColor: '#ffffff',
+	                strokeOpacity: 0,
+	                strokeWeight: 1,
+	                fillColor: '#FF0000',
+	                fillOpacity: 0.4,
+	                map: map,
+	                center: latLng,
+        	       		radius: Math.sqrt(places[i].capacity) * 100,
+	              });
+	        	google.maps.event.addListener(casCircle, 'click', function(ev) {
+	        		place2infoWindow[casCircle.center].setPosition(ev.latLng);
+	        		place2infoWindow[casCircle.center].open(map);
+	            });     			
+}
+        else{
+        		let marker = new google.maps.Marker({
+        			position: latLng,
+        			map: map,
+        			icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+        					+colors[categories.indexOf(places[i].category)]
+        		});
+        		marker.addListener('click', function() {
+        			place2infoWindow[marker.position].open(map, marker);
+	              });
+        }
+      }
+
+      var geocoder = new google.maps.Geocoder();
+      document.getElementById('findLatLng').addEventListener('click', function() {
+        getLatLng(geocoder);
+      });
+      mark = null
+      function getLatLng(geocoder){
+          geocoder.geocode( { 'address': document.getElementById("address").value}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+            	  if(mark!=null)
+            		  mark.setMap(null)
+              var latitude = results[0].geometry.location.lat();
+              var longitude = results[0].geometry.location.lng();
+              var posiz = new google.maps.LatLng(latitude,longitude);
+      	 	  mark = new google.maps.Marker({position: posiz, map: map});
+      	 	  mark.setAnimation(google.maps.Animation.BOUNCE);
+              document.getElementById("lat").value=latitude
+              document.getElementById("lng").value=longitude
+              document.getElementById("AddPlaceButton").disabled=false
+            }
+          })};
+
+    }
+
+    </script>
+
+
+
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyQsqdSCOSNKxOzT0Y3fK0RDScSvKVFpE&callback=initMap">
+    </script>
+
+	<!--   Core JS Files   -->
+	<script src="/js/jquery-3.2.1.min.js" type="text/javascript" />
+	<script src="/js/bootstrap.min.js" type="text/javascript" />
+	<script src="/js/material.min.js" type="text/javascript" />
+	<!--  Charts Plugin -->
+	<script src="/js/chartist.min.js" />
+	<!--  Dynamic Elements plugin -->
+	<script src="/js/arrive.min.js" />
+	<!--  PerfectScrollbar Library -->
+	<script src="/js/perfect-scrollbar.jquery.min.js" />
+	<!-- Material Dashboard javascript methods -->
+	<script src="/js/material-dashboard.js?v=1.2.0" />
+	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+	<script src="/js/demo.js" />
+	<!-- Material Dashboard javascript methods -->
+	<script src="/js/material-dashboard.js?v=1.2.0" />
+	<script type="text/javascript">
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+</body>
+</body>
+</html>
