@@ -106,19 +106,17 @@
                                     <th>Sesso</th>
                                     <th>Nazionalità</th>
                                     <th>Data Di Arrivo</th>
-                                    <th th:text="${#dates.format(date, 'dd-MM-yyyy')}"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="guest : ${guests}">
                                     <td th:text="${guest.id}"></td>
-                                    <td th:text="${guest.firstName}"></td>
-                                    <td th:text="${guest.lastName}"></td>
-                                    <td th:text="${#dates.format(guest.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                                    <td th:text="${guest.gender}"></td>
-                                    <td th:text="${guest.nationality}"></td>
+                                    <td th:text="${guest.migrant.personalRegister.firstName}"></td>
+                                    <td th:text="${guest.migrant.personalRegister.lastName}"></td>
+                                    <td th:text="${#dates.format(guest.migrant.personalRegister.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                                    <td th:text="${guest.migrant.personalRegister.gender}"></td>
+                                    <td th:text="${guest.migrant.personalRegister.nationality}"></td>
                                     <td th:text="${#dates.format(guest.checkInDate, 'dd-MM-yyyy')}"></td>
-                                    <td></td>
                                 </tr>
                                 </tbody>
                             </table>
