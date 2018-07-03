@@ -1,34 +1,570 @@
 [
-  {
-    "name": "CAS Barzilai",
-    "lat": 41.7946552,
-    "lng": 12.4595342,
-    "category": "CAS",
-    "capacity": 100,
-    "description":"CAS con 100 posti per uomini. La responsabile è la dott.ssa Maria Rossi... "
-  },
-  {
-    "name": "CAS Casilina",
-    "lat": 41.858396,
-    "lng": 12.649881,
-    "category": "CAS",
-    "capacity":139,
-    "description":"CAS con 139 posti per donne. La responsabile è la dott.ssa Ornella Verdi... "
-  },
-  {
-    "name": "CAS Decima",
-    "lat": 41.814888,
-    "lng": 12.45171,
-    "category": "CAS",
-    "capacity":79,
-    "description":"CAS con 79 posti per donne. La responsabile è la dott.ssa Gianna Rossi... "
-  },
-  {
-    "name": "Ospedale Bambino Gesù",
-    "lat": 41.8967341,
-    "lng": 12.460884599999986,
-    "category": "Ospedale",
-    "capacity":0,
-    "description":"L'Ospedale pediatrico Bambino Gesù è un ospedale pediatrico di Roma."
-  }
+	{
+		"name": "CAS ANZIO PORTOFINO",
+		"lat": 44.3031559,
+		"lng": 9.2097879,
+		"category": "CAS",
+		"capacity": 139,
+		"description": "Cas nel comune di Anzio dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS BARZILAI",
+		"lat": 41.8411484,
+		"lng": 12.5972004,
+		"category": "CAS",
+		"capacity": 100,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS PORRINO",
+		"lat": 39.2940805,
+		"lng": 8.9946942,
+		"category": "CAS",
+		"capacity": 100,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS SALORNO",
+		"lat": 41.730218,
+		"lng": 12.368361,
+		"category": "CAS",
+		"capacity": 70,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS DECIMA",
+		"lat": 41.8102724,
+		"lng": 12.4542245,
+		"category": "CAS",
+		"capacity": 79,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS CASILINA",
+		"lat": 41.85844600000001,
+		"lng": 12.6499179,
+		"category": "CAS",
+		"capacity": 139,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS CASILINA 2",
+		"lat": 41.85844600000001,
+		"lng": 12.6499179,
+		"category": "CAS",
+		"capacity": 79,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS CODIROSSONI",
+		"lat": 41.8723176,
+		"lng": 12.602564,
+		"category": "CAS",
+		"capacity": 139,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS STADERINI",
+		"lat": 41.8932703,
+		"lng": 12.5871813,
+		"category": "CAS",
+		"capacity": 430,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS RISERVA NUOVA 1 ",
+		"lat": 41.89825219999999,
+		"lng": 12.679697,
+		"category": "CAS",
+		"capacity": 128,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS RISERVA NUOVA 2 ",
+		"lat": 41.89825219999999,
+		"lng": 12.679697,
+		"category": "CAS",
+		"capacity": 128,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "Via Algarotti, 8",
+		"lat": 45.37888820000001,
+		"lng": 11.8712766,
+		"category": "CAS",
+		"capacity": 10,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Isolaverde"
+	},
+	{
+		"name": "Roma Point hotel",
+		"lat": 41.9620044,
+		"lng": 12.4870464,
+		"category": "CAS",
+		"capacity": 87,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Croce Rossa"
+	},
+	{
+		"name": "CAS PIETRALATA",
+		"lat": 41.9260629,
+		"lng": 12.5435214,
+		"category": "CAS",
+		"capacity": 150,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Croce Rossa"
+	},
+	{
+		"name": "CAS PENELOPE",
+		"lat": 41.8630264,
+		"lng": 12.4507089,
+		"category": "CAS",
+		"capacity": 30,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Croce Rossa"
+	},
+	{
+		"name": "CAS GINEVRA",
+		"lat": 41.8630327,
+		"lng": 12.4475352,
+		"category": "CAS",
+		"capacity": 36,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Croce Rossa"
+	},
+	{
+		"name": "CAS @HOME ALESSANDRINO",
+		"lat": 41.8733212,
+		"lng": 12.5802061,
+		"category": "CAS",
+		"capacity": 30,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Centro per l'autonomia"
+	},
+	{
+		"name": "Colle della Mentuccia",
+		"lat": 41.8946963,
+		"lng": 12.6120858,
+		"category": "CAS",
+		"capacity": 69,
+		"description": "Cas nel comune di Roma dell'Ente Gestore Eta Beta"
+	},
+	{
+		"name": "CASA DEL SOLE 3",
+		"lat": 41.9296508,
+		"lng": 12.5958727,
+		"category": "CAS",
+		"capacity": 74,
+		"description": "Cas nel comune di Roma dell'Ente Gestore VIRTUS ITALIA  ONLUS"
+	},
+	{
+		"name": "Via Torraccio di Torrenova, 131",
+		"lat": 41.8700588,
+		"lng": 12.6235668,
+		"category": "CAS",
+		"capacity": 60,
+		"description": "Cas nel comune di Roma dell'Ente Gestore IMMOBIL TRADE "
+	},
+	{
+		"name": "CAS POMEZIA ",
+		"lat": 41.7072312,
+		"lng": 12.5686761,
+		"category": "CAS",
+		"capacity": 139,
+		"description": "Cas nel comune di Pomezia dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS POMEZIA 2",
+		"lat": 41.7072312,
+		"lng": 12.5686761,
+		"category": "CAS",
+		"capacity": 100,
+		"description": "Cas nel comune di Pomezia dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS GUIDONIA",
+		"lat": 41.9745079,
+		"lng": 12.6381797,
+		"category": "CAS",
+		"capacity": 50,
+		"description": "Cas nel comune di Guidonia Montecelio dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS PISONIANO",
+		"lat": 41.9584217,
+		"lng": 12.8025428,
+		"category": "CAS",
+		"capacity": 50,
+		"description": "Cas nel comune di Pisoniano dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS NETTUNO",
+		"lat": 41.4636396,
+		"lng": 12.6732178,
+		"category": "CAS",
+		"capacity": 70,
+		"description": "Cas nel comune di Nettuno dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS SAN VITO",
+		"lat": 45.6932175,
+		"lng": 9.6714541,
+		"category": "CAS",
+		"capacity": 109,
+		"description": "Cas nel comune di San Vito Romano dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS FRASCATI",
+		"lat": 41.8331329,
+		"lng": 12.6768864,
+		"category": "CAS",
+		"capacity": 50,
+		"description": "Cas nel comune di Frascati dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS NETTUNO CHIUSA",
+		"lat": 45.45800269999999,
+		"lng": 9.1845366,
+		"category": "CAS",
+		"capacity": 50,
+		"description": "Cas nel comune di Nettuno dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS GIANNETTA",
+		"lat": 41.9824013,
+		"lng": 12.7044252,
+		"category": "CAS",
+		"capacity": 100,
+		"description": "Cas nel comune di Guidonia Montecelio dell'Ente Gestore Rti Tre Fontane - Senis Hospes"
+	},
+	{
+		"name": "CAS MORLUPO",
+		"lat": 13.909444,
+		"lng": -60.978893,
+		"category": "CAS",
+		"capacity": 50,
+		"description": "Cas nel comune di Morlupo dell'Ente Gestore Isolaverde"
+	},
+	{
+		"name": "NEMASU",
+		"lat": 42.1444214,
+		"lng": 12.5384121,
+		"category": "CAS",
+		"capacity": 18,
+		"description": "Cas nel comune di Morlupo dell'Ente Gestore Isolaverde"
+	},
+	{
+		"name": "CAS Mondo migliore",
+		"lat": 41.7408351,
+		"lng": 12.7010598,
+		"category": "CAS",
+		"capacity": 400,
+		"description": "Cas nel comune di Rocca di Papa dell'Ente Gestore OBLATI"
+	},
+	{
+		"name": "CAS @HOME MARINO",
+		"lat": 41.77144699999999,
+		"lng": 12.6515975,
+		"category": "CAS",
+		"capacity": 70,
+		"description": "Cas nel comune di Marino dell'Ente Gestore Centro per l'autonomia"
+	},
+	{
+		"name": "MARINO 2",
+		"lat": 41.7703951,
+		"lng": 12.6555003,
+		"category": "CAS",
+		"capacity": 7,
+		"description": "Cas nel comune di Marino dell'Ente Gestore GUS"
+	},
+	{
+		"name": "MARINO 3",
+		"lat": 41.1258866,
+		"lng": 16.8631494,
+		"category": "CAS",
+		"capacity": 10,
+		"description": "Cas nel comune di Marino dell'Ente Gestore GUS"
+	},
+	{
+		"name": "CHICCO DI GRANO",
+		"lat": 41.70178840000001,
+		"lng": 12.7682101,
+		"category": "CAS",
+		"capacity": 24,
+		"description": "Cas nel comune di Velletri dell'Ente Gestore I.SO.LA ONLUS"
+	},
+	{
+		"name": "Via Orti Ginnetti",
+		"lat": 41.6850558,
+		"lng": 12.7804308,
+		"category": "CAS",
+		"capacity": 23,
+		"description": "Cas nel comune di Velletri dell'Ente Gestore I.SO.LA ONLUS"
+	},
+	{
+		"name": "Via dei Bastioni 6/d ",
+		"lat": 43.76237440000001,
+		"lng": 11.2715628,
+		"category": "CAS",
+		"capacity": 15,
+		"description": "Cas nel comune di Velletri dell'Ente Gestore I.SO.LA ONLUS"
+	},
+	{
+		"name": "CAS TRE CANCELLI",
+		"lat": 41.4737877,
+		"lng": 12.6952207,
+		"category": "CAS",
+		"capacity": 150,
+		"description": "Cas nel comune di Nettuno dell'Ente Gestore Eta Beta"
+	},
+	{
+		"name": "CAS PACHA MAMA NEROLA",
+		"lat": 42.44594610000001,
+		"lng": 14.2037342,
+		"category": "CAS",
+		"capacity": 23,
+		"description": "Cas nel comune di Nerola dell'Ente Gestore RTI ERMES -STAND UP"
+	},
+	{
+		"name": "CAS MARCELLINA",
+		"lat": 42.0291368,
+		"lng": 12.7956628,
+		"category": "CAS",
+		"capacity": 87,
+		"description": "Cas nel comune di Marcellina dell'Ente Gestore Eta Beta"
+	},
+	{
+		"name": "CAS CIAMPINO",
+		"lat": 41.78250000000001,
+		"lng": 12.6205,
+		"category": "CAS",
+		"capacity": 80,
+		"description": "Cas nel comune di Ciampino dell'Ente Gestore Comune di Ciampino"
+	},
+	{
+		"name": "B&B  Porte di corte",
+		"lat": 41.9622343,
+		"lng": 12.9430414,
+		"category": "CAS",
+		"capacity": 16,
+		"description": "Cas nel comune di Ciciliano dell'Ente Gestore B&B  Porte di corte"
+	},
+	{
+		"name": "CASA DEL SOLE",
+		"lat": 41.7620557,
+		"lng": 12.2630573,
+		"category": "CAS",
+		"capacity": 64,
+		"description": "Cas nel comune di Fiumicino dell'Ente Gestore VIRTUS ITALIA ONLUS"
+	},
+	{
+		"name": "CASA DEL SOLE 2",
+		"lat": 41.7594302,
+		"lng": 12.6239785,
+		"category": "CAS",
+		"capacity": 54,
+		"description": "Cas nel comune di Marino dell'Ente Gestore VIRTUS ITALIA ONLUS"
+	},
+	{
+		"name": "CASA CARLOTTA",
+		"lat": 41.77147250000001,
+		"lng": 12.7726205,
+		"category": "CAS",
+		"capacity": 18,
+		"description": "Cas nel comune di Rocca Priora dell'Ente Gestore I.SO.LA ONLUS"
+	},
+	{
+		"name": "Via Martolana, 28",
+		"lat": 42.1460896,
+		"lng": 12.5408103,
+		"category": "CAS",
+		"capacity": 2,
+		"description": "Cas nel comune di Capena dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "Via Rossini, 26",
+		"lat": 45.46932109999999,
+		"lng": 9.2052063,
+		"category": "CAS",
+		"capacity": 4,
+		"description": "Cas nel comune di Capena dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "Vai E. Fermi, 6",
+		"lat": 42.1438882,
+		"lng": 12.538619,
+		"category": "CAS",
+		"capacity": 15,
+		"description": "Cas nel comune di Capena dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "Via Morlupo, 62",
+		"lat": 41.9458503,
+		"lng": 12.4766544,
+		"category": "CAS",
+		"capacity": 6,
+		"description": "Cas nel comune di Capena dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "Via E. Fermi, 16",
+		"lat": 44.623452,
+		"lng": 11.666377,
+		"category": "CAS",
+		"capacity": 6,
+		"description": "Cas nel comune di Monteflavio dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "Via Moscatelli, 111",
+		"lat": 42.0353591,
+		"lng": 12.64133,
+		"category": "CAS",
+		"capacity": 8,
+		"description": "Cas nel comune di Mentana dell'Ente Gestore PEGASO"
+	},
+	{
+		"name": "PARROCCHIA S. LEONE I",
+		"lat": 41.8911707,
+		"lng": 12.5292907,
+		"category": "CAS",
+		"capacity": 2,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "PARROCCHIA S. FRUMENZIO",
+		"lat": 41.947506,
+		"lng": 12.5160066,
+		"category": "CAS",
+		"capacity": 2,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "PARROCCHIA S. UGO",
+		"lat": 41.96361419999999,
+		"lng": 12.5139903,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "PARROCCHIA S. MARIA IMMACOLATA",
+		"lat": 41.8974348,
+		"lng": 12.514942,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "PARROCCHIA S. MARIA AI MONTI",
+		"lat": 41.8945621,
+		"lng": 12.4902842,
+		"category": "CAS",
+		"capacity": 2,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "S. GIUDA TADDEO APOSTOLO",
+		"lat": 41.8683737,
+		"lng": 12.5258755,
+		"category": "CAS",
+		"capacity": 1,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "IST. SUORE FRANCESCANE ANGELINE",
+		"lat": 41.8854307,
+		"lng": 12.4086988,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "CASA GENERALIZIA FRATELLI MARISTI",
+		"lat": 41.824698,
+		"lng": 12.4753739,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "PARROCCHIA SAN PONZIANO",
+		"lat": 41.9474691,
+		"lng": 12.5447675,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "CASA MATER MISERICORDIE",
+		"lat": 41.8742843,
+		"lng": 12.5067165,
+		"category": "CAS",
+		"capacity": 2,
+		"description": "Cas nel comune di Roma dell'Ente Gestore CARITAS"
+	},
+	{
+		"name": "CARA",
+		"lat": 42.0936145,
+		"lng": 12.5842354,
+		"category": "CAS",
+		"capacity": 650,
+		"description": "Cas nel comune di Castelnuovo di Porto dell'Ente Gestore AUXIULIUM"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 45.8281781,
+		"lng": 8.8375054,
+		"category": "CAS",
+		"capacity": 4,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 45.04571809999999,
+		"lng": 7.6750307,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 45.04571809999999,
+		"lng": 7.6750307,
+		"category": "CAS",
+		"capacity": 3,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 38.13618,
+		"lng": 13.3480514,
+		"category": "CAS",
+		"capacity": 8,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "METTING POINT",
+		"lat": 45.4916065,
+		"lng": 9.2270348,
+		"category": "CAS",
+		"capacity": 4,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 45.0697474,
+		"lng": 7.675799800000001,
+		"category": "CAS",
+		"capacity": 5,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 44.3587298,
+		"lng": 8.575367,
+		"category": "CAS",
+		"capacity": 4,
+		"description": "Cas nel comune di Riano dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	},
+	{
+		"name": "MEETING POINT",
+		"lat": 42.209662,
+		"lng": 12.483928,
+		"category": "CAS",
+		"capacity": 7,
+		"description": "Cas nel comune di Rignano Flaminio dell'Ente Gestore RTI IL VOLO/SAN MICHELE ARCANGELO"
+	}
 ]
